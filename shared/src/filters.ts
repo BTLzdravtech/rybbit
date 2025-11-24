@@ -25,10 +25,22 @@ export type FilterParameter =
   | "dimensions"
   | "browser_version"
   | "operating_system_version"
-  | "user_id";
+  | "user_id"
+  | "lat"
+  | "lon"
+  | "timezone"
+  | "vpn"
+  | "crawler"
+  | "datacenter"
+  | "company"
+  | "company_type"
+  | "company_domain"
+  | "asn_org"
+  | "asn_type"
+  | "asn_domain";
 
 export interface Filter {
   parameter: FilterParameter;
-  value: string[];
+  value: (string | number)[];
   type: FilterType;
 }

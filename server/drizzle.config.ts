@@ -29,4 +29,6 @@ export default defineConfig({
     max: 20,
   },
   verbose: true,
+  schemaFilter: ["public"],
+  tablesFilter: ['!pg_*'],
 });
