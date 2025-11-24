@@ -12,7 +12,18 @@ const client = postgres({
   database: process.env.POSTGRES_DB,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
-  ssl: process.env.POSTGRES_SSL === "true" ? true : false,
+  ssl:
+    process.env.POSTGRES_SSL === "true"
+      ? {
+          rejectUnauthorized:
+            process.env.POSTGRES_SSL_REJECT_UNAUTHORIZED === "false"
+              ? false
+              : true,
+          ca: process.env.POSTGRES_SSL_CA
+            ? process.env.POSTGRES_SSL_CA.replace(/\\n/g, "\n")
+            : undefined,
+        }
+      : false,
   onnotice: () => {},
   max: 20,
 });
