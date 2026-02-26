@@ -18,7 +18,7 @@ import { parseAsInteger, useQueryState } from "nuqs";
 import React, { Suspense, useEffect, useState } from "react";
 import { addSite } from "../../api/admin/endpoints";
 import { RybbitLogo, RybbitTextLogo } from "../../components/RybbitLogo";
-import { SpinningGlobe } from "../../components/SpinningGlobe";
+
 import { useSetPageTitle } from "../../hooks/useSetPageTitle";
 import { authClient } from "../../lib/auth";
 import { useConfigs } from "../../lib/configs";
@@ -310,20 +310,15 @@ function SignupPageContent() {
                 />
               </div> */}
 
-              <div className="flex flex-col gap-4">
-                <Button
-                  className="w-full transition-all duration-300 h-11 bg-emerald-600 hover:bg-emerald-500 text-white"
-                  onClick={handleOrganizationSubmit}
-                  disabled={isLoading || !orgName || !orgSlug || (IS_CLOUD && !referralSource)}
-                  variant="success"
-                >
-                  {t("Continue")}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button className="w-full transition-all duration-300 h-11" onClick={() => router.push("/")}>
-                  {t("I'm joining someone else's organization")}
-                </Button>
-              </div>
+              <Button
+                className="w-full transition-all duration-300 h-11 bg-emerald-600 hover:bg-emerald-500 text-white"
+                onClick={handleOrganizationSubmit}
+                disabled={isLoading || !orgName || !orgSlug || (IS_CLOUD && !referralSource)}
+                variant="success"
+              >
+                {t("Continue")}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </div>
           </div>
         );
@@ -394,9 +389,8 @@ function SignupPageContent() {
   }
 
   return (
-    <div className="flex h-dvh w-full">
-      {/* Left panel - signup form */}
-      <div className="w-full lg:w-[550px] flex flex-col p-6 lg:p-10">
+    <div className="flex h-dvh w-full justify-center">
+      <div className="w-full max-w-[550px] flex flex-col p-6 lg:p-10">
         {/* Logo at top left */}
         <div className="mb-8">
           <a href="https://rybbit.com" target="_blank" className="inline-block">
@@ -472,10 +466,6 @@ function SignupPageContent() {
         )}
       </div>
 
-      {/* Right panel - globe (hidden on mobile/tablet) */}
-      <div className="hidden lg:block lg:w-[calc(100%-500px)] relative m-3 rounded-2xl overflow-hidden">
-        <SpinningGlobe />
-      </div>
     </div>
   );
 }
