@@ -159,7 +159,7 @@ export function PlanStep({
           </button>
           {isAnnual && (
             <span className="absolute -top-3 -right-12 text-[10px] text-white bg-emerald-500 px-1.5 py-0.5 rounded-full whitespace-nowrap">
-              4 months free
+              {t("4 months free")}
             </span>
           )}
         </div>
@@ -200,7 +200,7 @@ export function PlanStep({
             <PlanRow
               plan="basic"
               label={t("Basic")}
-              description="1 site, 1 team member, basic features"
+              description={t("1 site, 1 team member, basic features")}
               eventLimit={basicAvailable ? eventLimit : 250_000}
               isAnnual={isAnnual}
               selectedPlan={selectedPlan}
@@ -211,7 +211,7 @@ export function PlanStep({
             <PlanRow
               plan="standard"
               label={t("Standard")}
-              description="Up to 5 sites, 3 team members, advanced features"
+              description={t("Up to 5 sites, 3 team members, advanced features")}
               eventLimit={eventLimit}
               isAnnual={isAnnual}
               selectedPlan={selectedPlan}
@@ -220,7 +220,7 @@ export function PlanStep({
             <PlanRow
               plan="pro"
               label={t("Pro")}
-              description="Unlimited sites, session replays"
+              description={t("Unlimited sites, session replays")}
               eventLimit={eventLimit}
               isAnnual={isAnnual}
               selectedPlan={selectedPlan}
