@@ -18,7 +18,7 @@ export function CustomPlan() {
 
   if (!subscription) return null;
 
-  const formatLimit = (value: number | null) => (value === null ? "Unlimited" : value.toLocaleString());
+  const formatLimit = (value: number | null) => (value === null ? t("Unlimited") : value.toLocaleString());
 
   return (
     <PlanCard

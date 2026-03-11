@@ -1,7 +1,7 @@
 import { authClient } from "@/lib/auth";
 import { useQuery } from "@tanstack/react-query";
 import { ExternalLink } from "lucide-react";
-import { useExtracted } from "next-intl";
+import { useExtracted, useLocale } from "next-intl";
 import { authedFetch } from "../../../api/utils";
 import { IS_CLOUD } from "../../../lib/const";
 import { Badge } from "../../ui/badge";
@@ -32,40 +32,40 @@ function useInvoices() {
   });
 }
 
-function formatCurrency(amount: number, currency: string) {
-  return new Intl.NumberFormat("en-US", {
+function formatCurrency(amount: number, currency: string, locale: string) {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: currency.toUpperCase(),
   }).format(amount / 100);
 }
 
-function formatDate(timestamp: number) {
-  return new Date(timestamp * 1000).toLocaleDateString("en-US", {
+function formatDate(timestamp: number, locale: string) {
+  return new Date(timestamp * 1000).toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
 }
 
-function getStatusBadge(status: string | null) {
-  switch (status) {
-    case "paid":
-      return <Badge variant="success">Paid</Badge>;
-    case "open":
-      return <Badge variant="warning">Open</Badge>;
-    case "void":
-      return <Badge variant="secondary">Void</Badge>;
-    case "uncollectible":
-      return <Badge variant="destructive">Uncollectible</Badge>;
-    case "draft":
-      return <Badge variant="secondary">Draft</Badge>;
-    default:
-      return <Badge variant="secondary">{status}</Badge>;
-  }
-}
+const statusVariants: Record<string, "success" | "warning" | "secondary" | "destructive"> = {
+  paid: "success",
+  open: "warning",
+  void: "secondary",
+  uncollectible: "destructive",
+  draft: "secondary",
+};
+
+const statusLabels: Record<string, string> = {
+  paid: "Paid",
+  open: "Open",
+  void: "Void",
+  uncollectible: "Uncollectible",
+  draft: "Draft",
+};
 
 export function InvoicesCard() {
   const t = useExtracted();
+  const locale = useLocale();
   const { data: invoices, isLoading } = useInvoices();
 
   if (isLoading || !invoices || invoices.length === 0) {
@@ -91,9 +91,13 @@ export function InvoicesCard() {
             <tbody>
               {invoices.map((invoice) => (
                 <tr key={invoice.id} className="border-b border-neutral-200/50 dark:border-neutral-800/50 last:border-0">
-                  <td className="py-2.5 pr-4">{formatDate(invoice.created)}</td>
-                  <td className="py-2.5 pr-4">{getStatusBadge(invoice.status)}</td>
-                  <td className="py-2.5 pr-4 text-right">{formatCurrency(invoice.amountPaid || invoice.amountDue, invoice.currency)}</td>
+                  <td className="py-2.5 pr-4">{formatDate(invoice.created, locale)}</td>
+                  <td className="py-2.5 pr-4">
+                    <Badge variant={statusVariants[invoice.status ?? ""] ?? "secondary"}>
+                      {t(statusLabels[invoice.status ?? ""] ?? invoice.status ?? "")}
+                    </Badge>
+                  </td>
+                  <td className="py-2.5 pr-4 text-right">{formatCurrency(invoice.amountPaid || invoice.amountDue, invoice.currency, locale)}</td>
                   <td className="py-2.5 text-right">
                     {invoice.hostedInvoiceUrl && (
                       <a

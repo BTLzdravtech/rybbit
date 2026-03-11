@@ -75,7 +75,6 @@ export async function getInvoices(
     console.error("Get Invoices Error:", error);
     return reply.status(500).send({
       error: "Failed to fetch invoices",
-      details: error.message,
     });
   }
 }

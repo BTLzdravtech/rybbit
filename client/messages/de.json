@@ -194,8 +194,8 @@
   "Zx7WPP": "Alle Event-Reihen ausgeblendet",
   "AKRVhS": "Klicken Sie auf ein Legendenelement, um es anzuzeigen",
   "NuhCPH": "Erfahren Sie, wie Sie Events verfolgen",
-  "/aq5/F": "Keine benutzerdefinierten Events gefunden",
   "ES6IYH": "Versuchen Sie einen anderen Zeitraum oder Filter",
+  "/aq5/F": "Keine benutzerdefinierten Events gefunden",
   "j7BiRg": "Kein Event ausgewählt.",
   "kF9XUo": "Zeitstempel",
   "EwRIOm": "Benutzer",
@@ -245,8 +245,8 @@
   "tHKpoN": "Keine Sitzungen wurden vor Erreichen dieses Schritts im ausgewählten Zeitraum abgebrochen.",
   "5elgIe": "Fehler:",
   "0hujDo": "Trichteranalyse fehlgeschlagen",
-  "gUKiFL": "Konfigurieren Sie Ihre Trichterschritte",
   "cSzyIV": "Trichter wird analysiert...",
+  "gUKiFL": "Konfigurieren Sie Ihre Trichterschritte",
   "XFyfI5": "Gesamtkonversion",
   "AFl3K6": "Konversion vom vorherigen Schritt",
   "s+vZVl": "Trichtervorschau",
@@ -1166,5 +1166,10 @@
   "5YSWst": "Skript ist installiert und läuft korrekt.",
   "EIQFLe": "Script-Tag gefunden, wird aber nicht ausgeführt",
   "+x0BAO": "Skript nicht erkannt",
-  "rOpS8J": "Rybbit v{latest} ist verfügbar (Sie verwenden v{current})"
+  "rOpS8J": "Rybbit v{latest} ist verfügbar (Sie verwenden v{current})",
+  "raz91s": "Bezahlt",
+  "N7QE9K": "Offen",
+  "6VtPnS": "Storniert",
+  "T6S3Fn": "Uneinbringlich",
+  "fS4iqP": "Entwurf"
 }
