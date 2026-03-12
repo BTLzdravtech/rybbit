@@ -228,9 +228,9 @@ export const googleAnalyticsExtendedData = {
 
   introHeading: "Why consider Rybbit over Google Analytics?",
   introParagraphs: [
-    "Google Analytics is the default choice for most websites, but that doesn't mean it's the best one. GA4's transition left many teams frustrated with a steep learning curve, confusing interface, and data sampling that makes reports unreliable at scale. Meanwhile, privacy regulations like GDPR have made GA4's cookie-dependent tracking a liability — multiple EU countries have ruled it non-compliant.",
+    "Google Analytics is the default choice for most websites, but that doesn't mean it's the best one. GA4's transition left many teams frustrated with a steep learning curve, confusing interface, and data sampling that makes reports unreliable at scale. Meanwhile, privacy regulations like GDPR have made GA4's cookie-dependent tracking a liability, and multiple EU countries have ruled it non-compliant.",
     "Rybbit takes a fundamentally different approach. Instead of harvesting user data to power an ad network, Rybbit exists solely to give you accurate, actionable analytics. It's cookie-free by default, so you never need consent banners. The single-page dashboard shows everything your team needs without digging through 150+ reports. And because it's open source, you can verify exactly how your data is handled.",
-    "The feature gap isn't what you'd expect either. Rybbit includes session replay, funnel analysis, user journey visualization, and real-time data without sampling — capabilities that GA4 either lacks or locks behind the $50,000/year GA360 tier. For teams that want powerful analytics without the complexity, privacy concerns, or vendor lock-in, Rybbit is the modern alternative GA4 should have been.",
+    "The feature gap isn't what you'd expect either. Rybbit includes session replay, funnel analysis, user journey visualization, and real-time data without sampling, all capabilities that GA4 either lacks or locks behind the $50,000/year GA360 tier. For teams that want powerful analytics without the complexity, privacy concerns, or vendor lock-in, Rybbit is the modern alternative GA4 should have been.",
   ],
 
   chooseRybbit: [
@@ -277,7 +277,7 @@ export const googleAnalyticsExtendedData = {
   faqItems: [
     {
       question: "Is it hard to migrate from Google Analytics to Rybbit?",
-      answer: "Not at all. Rybbit uses a single script tag — just add it to your site and you'll start collecting data immediately. There's no need to remove GA4 right away; you can run both in parallel to compare.",
+      answer: "Not at all. Rybbit uses a single script tag, so just add it to your site and you'll start collecting data immediately. There's no need to remove GA4 right away; you can run both in parallel to compare.",
     },
     {
       question: "Will I lose historical data if I switch?",
@@ -285,7 +285,7 @@ export const googleAnalyticsExtendedData = {
     },
     {
       question: "Does Rybbit work without cookies like GA4's consent mode?",
-      answer: "Yes, but differently. Rybbit is cookie-free by default — no consent mode needed. You never need to show a cookie banner for Rybbit, which means you capture 100% of your visitors without any consent friction.",
+      answer: "Yes, but differently. Rybbit is cookie-free by default, so no consent mode is needed. You never need to show a cookie banner for Rybbit, which means you capture 100% of your visitors without any consent friction.",
     },
     {
       question: "Can Rybbit track conversions and goals like GA4?",

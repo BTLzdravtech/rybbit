@@ -229,12 +229,12 @@ export const cloudflareAnalyticsComparisonData: ComparisonSection[] = [
 ];
 
 export const cloudflareAnalyticsExtendedData = {
-  subtitle: "Cloudflare Analytics is free but limited — Rybbit gives you accurate, unsampled data with the features you actually need.",
+  subtitle: "Cloudflare Analytics is free but limited, and Rybbit gives you accurate, unsampled data with the features you actually need.",
 
   introHeading: "Why consider Rybbit over Cloudflare Analytics?",
   introParagraphs: [
     "Cloudflare Web Analytics is free and requires no setup if you're already using Cloudflare's CDN. But free comes with serious limitations. Cloudflare only samples about 10% of your traffic and extrapolates the rest, which means your visitor counts are estimates, not facts. Data is retained for just 6 months, and there's no support for custom events, conversion goals, UTM tracking, or even basic metrics like bounce rate and visit duration.",
-    "Rybbit processes 100% of your events with zero sampling, so every number in your dashboard is accurate. You get the full analytics toolkit — custom events with attributes, conversion goals, funnel analysis, session replay, user journey visualization, and 2-5+ years of data retention. Plus, Rybbit works with any website regardless of hosting provider, so you're not locked into Cloudflare's CDN.",
+    "Rybbit processes 100% of your events with zero sampling, so every number in your dashboard is accurate. You get the full analytics toolkit: custom events with attributes, conversion goals, funnel analysis, session replay, user journey visualization, and 2-5+ years of data retention. Plus, Rybbit works with any website regardless of hosting provider, so you're not locked into Cloudflare's CDN.",
     "Think of Cloudflare Analytics as a basic traffic counter and Rybbit as a complete analytics platform. If you just need to know roughly how many people visited your site, Cloudflare is fine. But if you want to understand user behavior, optimize conversions, debug issues with session replay, or make data-driven decisions with accurate numbers, Rybbit is what you need.",
   ],
 
@@ -286,7 +286,7 @@ export const cloudflareAnalyticsExtendedData = {
     },
     {
       question: "Do I need Cloudflare CDN to use Cloudflare Analytics?",
-      answer: "Yes. Cloudflare Analytics requires routing your DNS through Cloudflare. Rybbit works with any website regardless of CDN or hosting provider — just add a single script tag.",
+      answer: "Yes. Cloudflare Analytics requires routing your DNS through Cloudflare. Rybbit works with any website regardless of CDN or hosting provider. Just add a single script tag.",
     },
     {
       question: "What features does Cloudflare Analytics lack?",
@@ -298,7 +298,7 @@ export const cloudflareAnalyticsExtendedData = {
     },
     {
       question: "Can I use Rybbit alongside Cloudflare Analytics?",
-      answer: "Yes. Many teams add Rybbit for detailed analytics while keeping Cloudflare for basic CDN-level traffic monitoring. Just add Rybbit's script tag to your site — it works alongside any other analytics tool.",
+      answer: "Yes. Many teams add Rybbit for detailed analytics while keeping Cloudflare for basic CDN-level traffic monitoring. Just add Rybbit's script tag to your site, and it works alongside any other analytics tool.",
     },
   ] satisfies FAQItem[],
 

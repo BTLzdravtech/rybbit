@@ -213,9 +213,9 @@ export const fathomExtendedData = {
 
   introHeading: "Why consider Rybbit over Fathom?",
   introParagraphs: [
-    "Fathom Analytics is a well-respected privacy-first analytics tool known for its clean interface and cookie-free tracking. It's a solid choice for websites that need simple traffic metrics without the complexity of Google Analytics. But Fathom is intentionally limited to basic web analytics — there's no session replay, no funnel analysis, no user journey visualization, and it's entirely closed-source with no self-hosting option.",
+    "Fathom Analytics is a well-respected privacy-first analytics tool known for its clean interface and cookie-free tracking. It's a solid choice for websites that need simple traffic metrics without the complexity of Google Analytics. But Fathom is intentionally limited to basic web analytics: no session replay, no funnel analysis, no user journey visualization, and it's entirely closed-source with no self-hosting option.",
     "Rybbit shares Fathom's commitment to privacy and simplicity but extends far beyond basic web metrics. You get session replay to see exactly how users interact with your site, funnel analysis to identify conversion bottlenecks, user journey visualization with Sankey diagrams, Web Vitals monitoring, and error tracking. This means you can understand not just how many visitors you get, but how they convert, where they drop off, and what issues they encounter.",
-    "Transparency is another major difference. Rybbit is fully open source under the AGPL v3 license — you can inspect every line of code and self-host on your own infrastructure. Fathom is proprietary and cloud-only, so you're trusting their claims about data handling without the ability to verify. If you love Fathom's privacy-first approach but need deeper analytics, code transparency, and the freedom to self-host, Rybbit gives you all of that.",
+    "Transparency is another major difference. Rybbit is fully open source under the AGPL v3 license, so you can inspect every line of code and self-host on your own infrastructure. Fathom is proprietary and cloud-only, so you're trusting their claims about data handling without the ability to verify. If you love Fathom's privacy-first approach but need deeper analytics, code transparency, and the freedom to self-host, Rybbit gives you all of that.",
   ],
 
   chooseRybbit: [
@@ -254,14 +254,14 @@ export const fathomExtendedData = {
       "Starts at 100k pageviews/month",
       "No free tier available",
       "All features included on every plan",
-      "Cloud-only — no self-hosting option",
+      "Cloud-only, no self-hosting option",
     ],
   } satisfies PricingInfo,
 
   faqItems: [
     {
       question: "Is Rybbit open source while Fathom is not?",
-      answer: "Yes. Rybbit is fully open source under the AGPL v3 license, meaning you can inspect the code, self-host it, and verify exactly how your data is handled. Fathom is proprietary and closed-source — you have to trust their claims about data handling.",
+      answer: "Yes. Rybbit is fully open source under the AGPL v3 license, meaning you can inspect the code, self-host it, and verify exactly how your data is handled. Fathom is proprietary and closed-source, so you have to trust their claims about data handling.",
     },
     {
       question: "What features does Rybbit have that Fathom doesn't?",

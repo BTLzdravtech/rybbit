@@ -383,7 +383,7 @@ export function ComparisonPage({
       )}
 
       <CTASection
-        title="It's time to switch to analytics that's made for you"
+        title="Switch to analytics that's made for you"
         eventLocation="comparison_bottom_cta"
       />
     </div>
