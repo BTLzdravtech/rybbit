@@ -1,4 +1,5 @@
-import { ComparisonSection } from "../components/ComparisonPage";
+import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
+import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const umamiComparisonData: ComparisonSection[] = [
   {
@@ -247,3 +248,104 @@ export const umamiComparisonData: ComparisonSection[] = [
     ],
   },
 ];
+
+export const umamiExtendedData = {
+  subtitle: "Both are open source and privacy-first, but Rybbit offers session replay, funnels, and user journeys that Umami doesn't.",
+
+  chooseRybbit: [
+    "You need session replay to see how users interact with your site",
+    "You want error tracking and Web Vitals monitoring built in",
+    "You need organization support with team roles and permissions",
+    "You want a daily rotating salt option for extra privacy",
+    "You need ClickHouse performance for high-traffic analytics",
+    "You want a real-time globe view of your visitors",
+  ],
+
+  chooseCompetitor: [
+    "You want the smallest possible tracking script (2KB)",
+    "You prefer PostgreSQL or MySQL over ClickHouse for self-hosting",
+    "You only need basic pageview and event tracking",
+    "You want a completely free self-hosted solution with no limits",
+    "You're running a personal blog or lightweight content site",
+  ],
+
+  rybbitPricing: {
+    name: "Rybbit",
+    model: "Events-based pricing",
+    startingPrice: "$19/mo",
+    highlights: [
+      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
+      "All features included on every plan",
+      "Session replay included at no extra cost",
+      "Unlimited team members",
+    ],
+  } satisfies PricingInfo,
+
+  competitorPricing: {
+    name: "Umami",
+    model: "Usage-based + flat fee",
+    startingPrice: "$20/mo",
+    highlights: [
+      "Hobby plan at $20/mo for 100k events",
+      "Self-hosted version is completely free",
+      "Cloud plans scale with usage",
+      "No free cloud tier available",
+    ],
+  } satisfies PricingInfo,
+
+  faqItems: [
+    {
+      question: "How is Rybbit different from Umami?",
+      answer: "Both are open-source and privacy-first, but Rybbit includes advanced features Umami lacks: session replay, error tracking, Web Vitals monitoring, real-time globe view, and organization support. Rybbit also uses ClickHouse for better performance at scale.",
+    },
+    {
+      question: "Can I migrate from Umami to Rybbit?",
+      answer: "Yes. Just add Rybbit's script tag to your site and data starts flowing immediately. You can run both tools in parallel during the transition. Historical Umami data won't transfer, but new data collection begins instantly.",
+    },
+    {
+      question: "Which is easier to self-host?",
+      answer: "Both are straightforward to self-host with Docker. Umami supports PostgreSQL/MySQL which may be more familiar. Rybbit uses ClickHouse which offers better analytics query performance at scale but is a less common database.",
+    },
+    {
+      question: "Does Rybbit have a larger script than Umami?",
+      answer: "Yes, Rybbit's script is 18KB compared to Umami's 2KB. The additional size enables features like session replay, error tracking, and Web Vitals monitoring. Both are small enough to have negligible impact on page load.",
+    },
+    {
+      question: "Are both GDPR compliant?",
+      answer: "Yes. Both Rybbit and Umami are cookie-free and don't collect personal data. Rybbit adds an extra privacy option with daily rotating salt for user ID hashing, ensuring visitors can't be tracked across days.",
+    },
+  ] satisfies FAQItem[],
+
+  relatedResources: [
+    {
+      title: "Rybbit vs Google Analytics",
+      href: "/compare/google-analytics",
+      description: "The privacy-first alternative to GA4",
+    },
+    {
+      title: "Rybbit vs Plausible",
+      href: "/compare/plausible",
+      description: "Compare two privacy-first analytics platforms",
+    },
+    {
+      title: "Rybbit vs Fathom",
+      href: "/compare/fathom",
+      description: "Open source vs proprietary privacy analytics",
+    },
+    {
+      title: "Getting started with Rybbit",
+      href: "/docs",
+      description: "Set up Rybbit in under 5 minutes",
+    },
+    {
+      title: "Self-hosting guide",
+      href: "/docs/self-hosting",
+      description: "Deploy Rybbit on your own infrastructure",
+    },
+    {
+      title: "Pricing",
+      href: "/pricing",
+      description: "Simple, transparent pricing for every team size",
+    },
+  ] satisfies RelatedResource[],
+};

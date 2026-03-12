@@ -1,4 +1,5 @@
-import { ComparisonSection } from "../components/ComparisonPage";
+import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
+import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const cloudflareAnalyticsComparisonData: ComparisonSection[] = [
   {
@@ -227,3 +228,104 @@ export const cloudflareAnalyticsComparisonData: ComparisonSection[] = [
     ],
   },
 ];
+
+export const cloudflareAnalyticsExtendedData = {
+  subtitle: "Cloudflare Analytics is free but limited — Rybbit gives you accurate, unsampled data with the features you actually need.",
+
+  chooseRybbit: [
+    "You need 100% accurate data without sampling (Cloudflare uses 10% samples)",
+    "You want full analytics features: UTM tracking, custom events, goals, funnels",
+    "You need session replay and user journey visualization",
+    "You want 2-5+ years of data retention instead of 6 months",
+    "You need analytics that works without Cloudflare CDN lock-in",
+    "You want open-source software you can self-host",
+  ],
+
+  chooseCompetitor: [
+    "You already use Cloudflare CDN and want zero-cost basic analytics",
+    "You only need a high-level traffic overview",
+    "You don't need custom events, goals, or conversion tracking",
+    "You want analytics with absolutely no setup beyond DNS",
+    "Basic Web Vitals monitoring is all you need",
+  ],
+
+  rybbitPricing: {
+    name: "Rybbit",
+    model: "Events-based pricing",
+    startingPrice: "$19/mo",
+    highlights: [
+      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
+      "All features included on every plan",
+      "100% unsampled, accurate data",
+      "2-5+ years data retention",
+    ],
+  } satisfies PricingInfo,
+
+  competitorPricing: {
+    name: "Cloudflare Analytics",
+    model: "Free (bundled with CDN)",
+    startingPrice: "Free",
+    highlights: [
+      "Included free with Cloudflare CDN",
+      "Only 10% sampled data (not accurate)",
+      "6-month data retention limit",
+      "No custom events, goals, or funnels",
+    ],
+  } satisfies PricingInfo,
+
+  faqItems: [
+    {
+      question: "Why is Cloudflare Analytics data inaccurate?",
+      answer: "Cloudflare Analytics samples only about 10% of your traffic and extrapolates the rest. This means visitor counts are often significantly overcounted and you can't trust the exact numbers. Rybbit processes 100% of your events with no sampling.",
+    },
+    {
+      question: "Do I need Cloudflare CDN to use Cloudflare Analytics?",
+      answer: "Yes. Cloudflare Analytics requires routing your DNS through Cloudflare. Rybbit works with any website regardless of CDN or hosting provider — just add a single script tag.",
+    },
+    {
+      question: "What features does Cloudflare Analytics lack?",
+      answer: "Cloudflare Analytics doesn't support custom events, conversion goals, UTM campaign tracking, session replay, funnels, user journeys, bounce rate, visit duration, entry/exit pages, or an API. It only provides basic traffic metrics with sampled data.",
+    },
+    {
+      question: "How long does Cloudflare keep my data?",
+      answer: "Cloudflare retains analytics data for only 6 months. Rybbit retains data for 2-5+ years depending on your plan, and you can export your data at any time.",
+    },
+    {
+      question: "Can I use Rybbit alongside Cloudflare Analytics?",
+      answer: "Yes. Many teams add Rybbit for detailed analytics while keeping Cloudflare for basic CDN-level traffic monitoring. Just add Rybbit's script tag to your site — it works alongside any other analytics tool.",
+    },
+  ] satisfies FAQItem[],
+
+  relatedResources: [
+    {
+      title: "Rybbit vs Google Analytics",
+      href: "/compare/google-analytics",
+      description: "The privacy-first alternative to GA4",
+    },
+    {
+      title: "Rybbit vs Matomo",
+      href: "/compare/matomo",
+      description: "Modern analytics vs the legacy GA alternative",
+    },
+    {
+      title: "Rybbit vs Umami",
+      href: "/compare/umami",
+      description: "Two open-source analytics tools compared",
+    },
+    {
+      title: "Getting started with Rybbit",
+      href: "/docs",
+      description: "Set up Rybbit in under 5 minutes",
+    },
+    {
+      title: "Self-hosting guide",
+      href: "/docs/self-hosting",
+      description: "Deploy Rybbit on your own infrastructure",
+    },
+    {
+      title: "Pricing",
+      href: "/pricing",
+      description: "Simple, transparent pricing for every team size",
+    },
+  ] satisfies RelatedResource[],
+};

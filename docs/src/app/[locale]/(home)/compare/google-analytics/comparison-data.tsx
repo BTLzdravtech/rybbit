@@ -1,4 +1,5 @@
-import { ComparisonSection } from "../components/ComparisonPage";
+import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
+import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const googleAnalyticsComparisonData: ComparisonSection[] = [
   {
@@ -222,3 +223,104 @@ export const googleAnalyticsComparisonData: ComparisonSection[] = [
     ],
   },
 ];
+
+export const googleAnalyticsExtendedData = {
+  subtitle: "See why privacy-conscious teams are switching from GA4 to Rybbit's open-source, cookie-free analytics.",
+
+  chooseRybbit: [
+    "You want privacy-first analytics without cookie banners",
+    "You need a simple dashboard your whole team can understand",
+    "You want to self-host and own 100% of your data",
+    "You need session replay, funnels, and user journeys in one tool",
+    "You want accurate data without sampling or ad-blocker issues",
+    "You prefer open-source software with transparent pricing",
+  ],
+
+  chooseCompetitor: [
+    "You need deep integration with Google Ads and the Google ecosystem",
+    "You require highly customizable reports and dashboards",
+    "You need free analytics for very high-traffic sites",
+    "Your organization already has workflows built around GA4",
+    "You need advanced attribution modeling for paid campaigns",
+  ],
+
+  rybbitPricing: {
+    name: "Rybbit",
+    model: "Events-based pricing",
+    startingPrice: "$19/mo",
+    highlights: [
+      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
+      "All features included on every plan",
+      "Session replay included at no extra cost",
+      "Unlimited team members",
+    ],
+  } satisfies PricingInfo,
+
+  competitorPricing: {
+    name: "Google Analytics",
+    model: "Free (ad-supported)",
+    startingPrice: "Free",
+    highlights: [
+      "Free for most websites",
+      "GA360 starts at ~$50,000/year for enterprises",
+      "Data used to power Google's ad network",
+      "Limited data retention (2-14 months)",
+    ],
+  } satisfies PricingInfo,
+
+  faqItems: [
+    {
+      question: "Is it hard to migrate from Google Analytics to Rybbit?",
+      answer: "Not at all. Rybbit uses a single script tag — just add it to your site and you'll start collecting data immediately. There's no need to remove GA4 right away; you can run both in parallel to compare.",
+    },
+    {
+      question: "Will I lose historical data if I switch?",
+      answer: "Rybbit starts collecting data from the moment you install it, so there's no migration of historical GA data. Many teams run both tools in parallel for a transition period before fully switching.",
+    },
+    {
+      question: "Does Rybbit work without cookies like GA4's consent mode?",
+      answer: "Yes, but differently. Rybbit is cookie-free by default — no consent mode needed. You never need to show a cookie banner for Rybbit, which means you capture 100% of your visitors without any consent friction.",
+    },
+    {
+      question: "Can Rybbit track conversions and goals like GA4?",
+      answer: "Yes. Rybbit supports conversion goals, funnels, and custom events with attributes. While the setup is simpler than GA4's event configuration, you get the same core conversion tracking capabilities.",
+    },
+    {
+      question: "Does Rybbit offer real-time analytics?",
+      answer: "Yes, Rybbit provides real-time data out of the box with no sampling. Unlike GA4 which may sample data on high-traffic properties, Rybbit shows every event as it happens.",
+    },
+  ] satisfies FAQItem[],
+
+  relatedResources: [
+    {
+      title: "Rybbit vs Plausible",
+      href: "/compare/plausible",
+      description: "Compare two privacy-first analytics platforms",
+    },
+    {
+      title: "Rybbit vs PostHog",
+      href: "/compare/posthog",
+      description: "Focused analytics vs all-in-one product suite",
+    },
+    {
+      title: "Rybbit vs Matomo",
+      href: "/compare/matomo",
+      description: "Modern analytics vs the legacy GA alternative",
+    },
+    {
+      title: "Getting started with Rybbit",
+      href: "/docs",
+      description: "Set up Rybbit in under 5 minutes",
+    },
+    {
+      title: "Self-hosting guide",
+      href: "/docs/self-hosting",
+      description: "Deploy Rybbit on your own infrastructure",
+    },
+    {
+      title: "Pricing",
+      href: "/pricing",
+      description: "Simple, transparent pricing for every team size",
+    },
+  ] satisfies RelatedResource[],
+};

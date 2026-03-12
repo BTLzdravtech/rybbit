@@ -1,6 +1,5 @@
 import { ComparisonPage } from "../components/ComparisonPage";
-import { simpleAnalyticsComparisonData } from "./comparison-data";
-import { SimpleAnalyticsComparisonContent } from "./ComparisonContent";
+import { simpleAnalyticsComparisonData, simpleAnalyticsExtendedData } from "./comparison-data";
 import type { Metadata } from "next";
 import { createOGImageUrl } from "@/lib/metadata";
 
@@ -78,9 +77,15 @@ export default function SimpleAnalytics() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <ComparisonPage
-        competitorName="SimpleAnalytics"
+        competitorName="Simple Analytics"
         sections={simpleAnalyticsComparisonData}
-        comparisonContent={<SimpleAnalyticsComparisonContent />}
+        subtitle={simpleAnalyticsExtendedData.subtitle}
+        chooseRybbit={simpleAnalyticsExtendedData.chooseRybbit}
+        chooseCompetitor={simpleAnalyticsExtendedData.chooseCompetitor}
+        rybbitPricing={simpleAnalyticsExtendedData.rybbitPricing}
+        competitorPricing={simpleAnalyticsExtendedData.competitorPricing}
+        faqItems={simpleAnalyticsExtendedData.faqItems}
+        relatedResources={simpleAnalyticsExtendedData.relatedResources}
       />
     </>
   );

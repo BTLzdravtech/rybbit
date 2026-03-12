@@ -1,5 +1,5 @@
 import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
-import { ComparisonSection } from "../components/ComparisonPage";
+import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const fathomComparisonData: ComparisonSection[] = [
   {
@@ -208,3 +208,104 @@ export const fathomComparisonData: ComparisonSection[] = [
     ],
   },
 ];
+
+export const fathomExtendedData = {
+  subtitle: "Both are privacy-first, but Rybbit is open source with session replay, funnels, and a free tier that Fathom doesn't offer.",
+
+  chooseRybbit: [
+    "You want open-source software you can audit and self-host",
+    "You need session replay, funnels, and user journey visualization",
+    "You want a free tier to get started without a credit card",
+    "You need error tracking and Web Vitals monitoring",
+    "You prefer events-based pricing over pageview-based",
+    "You want full code transparency (AGPL v3)",
+  ],
+
+  chooseCompetitor: [
+    "You want the smallest possible tracking script (2KB)",
+    "You prefer a more established product with a longer track record",
+    "You only need basic pageview and conversion tracking",
+    "You want built-in email reports",
+    "You don't want to worry about self-hosting or infrastructure",
+  ],
+
+  rybbitPricing: {
+    name: "Rybbit",
+    model: "Events-based pricing",
+    startingPrice: "$19/mo",
+    highlights: [
+      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
+      "Session replay included on all plans",
+      "Funnels, user journeys, and error tracking included",
+      "Self-hosting option available (free)",
+    ],
+  } satisfies PricingInfo,
+
+  competitorPricing: {
+    name: "Fathom",
+    model: "Pageview-based pricing",
+    startingPrice: "$15/mo",
+    highlights: [
+      "Starts at 100k pageviews/month",
+      "No free tier available",
+      "All features included on every plan",
+      "Cloud-only — no self-hosting option",
+    ],
+  } satisfies PricingInfo,
+
+  faqItems: [
+    {
+      question: "Is Rybbit open source while Fathom is not?",
+      answer: "Yes. Rybbit is fully open source under the AGPL v3 license, meaning you can inspect the code, self-host it, and verify exactly how your data is handled. Fathom is proprietary and closed-source — you have to trust their claims about data handling.",
+    },
+    {
+      question: "What features does Rybbit have that Fathom doesn't?",
+      answer: "Rybbit includes session replay, funnel analysis, user journey visualization (Sankey diagrams), Web Vitals monitoring, error tracking, user profiles, and sessions tracking. Fathom focuses on basic pageview and conversion analytics.",
+    },
+    {
+      question: "How does pricing compare between Rybbit and Fathom?",
+      answer: "Rybbit starts at $19/month with events-based pricing and includes a free tier. Fathom starts at $15/month with pageview-based pricing and no free tier. Rybbit includes significantly more features at a comparable price point.",
+    },
+    {
+      question: "Can I self-host Rybbit like I can with other tools?",
+      answer: "Yes, Rybbit is fully self-hostable. Fathom does not offer self-hosting at all. If data sovereignty and infrastructure control matter to you, Rybbit gives you the option to run everything on your own servers.",
+    },
+    {
+      question: "Is it easy to switch from Fathom to Rybbit?",
+      answer: "Yes. Just add Rybbit's script tag to your site and data starts collecting immediately. You can run both in parallel during the transition. The setup takes less than 5 minutes.",
+    },
+  ] satisfies FAQItem[],
+
+  relatedResources: [
+    {
+      title: "Rybbit vs Plausible",
+      href: "/compare/plausible",
+      description: "Compare two privacy-first analytics platforms",
+    },
+    {
+      title: "Rybbit vs Simple Analytics",
+      href: "/compare/simpleanalytics",
+      description: "Feature-rich vs minimal analytics",
+    },
+    {
+      title: "Rybbit vs Umami",
+      href: "/compare/umami",
+      description: "Two open-source analytics tools compared",
+    },
+    {
+      title: "Getting started with Rybbit",
+      href: "/docs",
+      description: "Set up Rybbit in under 5 minutes",
+    },
+    {
+      title: "Self-hosting guide",
+      href: "/docs/self-hosting",
+      description: "Deploy Rybbit on your own infrastructure",
+    },
+    {
+      title: "Pricing",
+      href: "/pricing",
+      description: "Simple, transparent pricing for every team size",
+    },
+  ] satisfies RelatedResource[],
+};

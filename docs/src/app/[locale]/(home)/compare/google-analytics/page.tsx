@@ -1,6 +1,5 @@
 import { ComparisonPage } from "../components/ComparisonPage";
-import { googleAnalyticsComparisonData } from "./comparison-data";
-import { GoogleAnalyticsComparisonContent } from "./ComparisonContent";
+import { googleAnalyticsComparisonData, googleAnalyticsExtendedData } from "./comparison-data";
 import type { Metadata } from "next";
 import { createOGImageUrl } from "@/lib/metadata";
 
@@ -81,7 +80,13 @@ export default function GoogleAnalytics() {
       <ComparisonPage
         competitorName="Google Analytics"
         sections={googleAnalyticsComparisonData}
-        comparisonContent={<GoogleAnalyticsComparisonContent />}
+        subtitle={googleAnalyticsExtendedData.subtitle}
+        chooseRybbit={googleAnalyticsExtendedData.chooseRybbit}
+        chooseCompetitor={googleAnalyticsExtendedData.chooseCompetitor}
+        rybbitPricing={googleAnalyticsExtendedData.rybbitPricing}
+        competitorPricing={googleAnalyticsExtendedData.competitorPricing}
+        faqItems={googleAnalyticsExtendedData.faqItems}
+        relatedResources={googleAnalyticsExtendedData.relatedResources}
       />
     </>
   );

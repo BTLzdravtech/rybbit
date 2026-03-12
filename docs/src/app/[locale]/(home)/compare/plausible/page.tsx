@@ -1,6 +1,5 @@
 import { ComparisonPage } from "../components/ComparisonPage";
-import { plausibleComparisonData } from "./comparison-data";
-import { PlausibleComparisonContent } from "./ComparisonContent";
+import { plausibleComparisonData, plausibleExtendedData } from "./comparison-data";
 import type { Metadata } from "next";
 import { createOGImageUrl } from "@/lib/metadata";
 
@@ -80,7 +79,13 @@ export default function Plausible() {
       <ComparisonPage
         competitorName="Plausible"
         sections={plausibleComparisonData}
-        comparisonContent={<PlausibleComparisonContent />}
+        subtitle={plausibleExtendedData.subtitle}
+        chooseRybbit={plausibleExtendedData.chooseRybbit}
+        chooseCompetitor={plausibleExtendedData.chooseCompetitor}
+        rybbitPricing={plausibleExtendedData.rybbitPricing}
+        competitorPricing={plausibleExtendedData.competitorPricing}
+        faqItems={plausibleExtendedData.faqItems}
+        relatedResources={plausibleExtendedData.relatedResources}
       />
     </>
   );
