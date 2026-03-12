@@ -1,4 +1,3 @@
-import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
 import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const posthogComparisonData: ComparisonSection[] = [
@@ -262,7 +261,7 @@ export const posthogComparisonData: ComparisonSection[] = [
       },
       {
         name: "Autocapture",
-        rybbitValue: false,
+        rybbitValue: true,
         competitorValue: true,
       },
     ],
@@ -313,7 +312,7 @@ export const posthogExtendedData = {
 
   chooseCompetitor: [
     "You need feature flags and A/B testing in your analytics tool",
-    "You want heatmaps and autocapture out of the box",
+    "You want heatmaps out of the box",
     "You need a SQL query interface for custom analysis",
     "You want surveys integrated with your analytics",
     "You need a mobile app for on-the-go analytics",
@@ -325,9 +324,9 @@ export const posthogExtendedData = {
     model: "Events-based pricing",
     startingPrice: "$19/mo",
     highlights: [
-      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
+      "7-day free trial, no credit card required",
       "All features included — no add-on costs",
-      "Session replay included on every plan",
+      "Session replay available on Pro plan",
       "Predictable billing with no overages",
     ],
   } satisfies PricingInfo,

@@ -1,4 +1,3 @@
-import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
 import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const umamiComparisonData: ComparisonSection[] = [
@@ -274,9 +273,9 @@ export const umamiExtendedData = {
     model: "Events-based pricing",
     startingPrice: "$19/mo",
     highlights: [
-      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
+      "7-day free trial, no credit card required",
       "All features included on every plan",
-      "Session replay included at no extra cost",
+      "Session replay available on Pro plan",
       "Unlimited team members",
     ],
   } satisfies PricingInfo,

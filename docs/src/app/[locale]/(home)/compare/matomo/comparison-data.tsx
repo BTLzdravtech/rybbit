@@ -1,4 +1,3 @@
-import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
 import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const matomoComparisonData: ComparisonSection[] = [
@@ -226,8 +225,8 @@ export const matomoComparisonData: ComparisonSection[] = [
         competitorValue: "Paid only",
       },
       {
-        name: "Free tier",
-        rybbitValue: DEFAULT_EVENT_LIMIT.toLocaleString() + " events",
+        name: "Free trial",
+        rybbitValue: "7 days",
         competitorValue: "Self-host only",
       },
       {
@@ -263,7 +262,7 @@ export const matomoExtendedData = {
     "You prefer a modern tech stack (Next.js/ClickHouse) over legacy PHP",
     "You want cloud hosting with zero maintenance",
     "You need session replay, user journeys, and Web Vitals built in",
-    "You want a free tier to get started",
+    "You want a 7-day free trial to evaluate before committing",
   ],
 
   chooseCompetitor: [
@@ -279,21 +278,21 @@ export const matomoExtendedData = {
     model: "Events-based pricing",
     startingPrice: "$19/mo",
     highlights: [
-      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
+      "7-day free trial, no credit card required",
       "All features included on every plan",
-      "Session replay included at no extra cost",
+      "Session replay available on Pro plan",
       "Zero maintenance cloud hosting",
     ],
   } satisfies PricingInfo,
 
   competitorPricing: {
-    name: "Matomo",
-    model: "Pageview-based / self-host free",
-    startingPrice: "Free (self-host)",
+    name: "Matomo Cloud",
+    model: "Pageview-based pricing",
+    startingPrice: "\u20AC19/mo",
     highlights: [
-      "On-Premise edition is free (self-host only)",
-      "Cloud starts at \u20AC19/mo for 50k hits",
-      "Many features require paid plugins",
+      "Starts at 50k hits/month",
+      "On-Premise edition available for free (self-host)",
+      "Many features require paid plugins on top",
       "Self-hosting requires server maintenance",
     ],
   } satisfies PricingInfo,

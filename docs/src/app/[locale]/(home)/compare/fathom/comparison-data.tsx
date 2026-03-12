@@ -1,4 +1,3 @@
-import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
 import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const fathomComparisonData: ComparisonSection[] = [
@@ -157,7 +156,7 @@ export const fathomComparisonData: ComparisonSection[] = [
       },
       {
         name: "Email reports",
-        rybbitValue: false,
+        rybbitValue: true,
         competitorValue: true,
       },
     ],
@@ -191,8 +190,8 @@ export const fathomComparisonData: ComparisonSection[] = [
     title: "Pricing & Support",
     features: [
       {
-        name: "Free tier",
-        rybbitValue: DEFAULT_EVENT_LIMIT.toLocaleString() + " events",
+        name: "Free trial",
+        rybbitValue: "7 days",
         competitorValue: false,
       },
       {
@@ -210,12 +209,12 @@ export const fathomComparisonData: ComparisonSection[] = [
 ];
 
 export const fathomExtendedData = {
-  subtitle: "Both are privacy-first, but Rybbit is open source with session replay, funnels, and a free tier that Fathom doesn't offer.",
+  subtitle: "Both are privacy-first, but Rybbit is open source with session replay, funnels, and self-hosting that Fathom doesn't offer.",
 
   chooseRybbit: [
     "You want open-source software you can audit and self-host",
     "You need session replay, funnels, and user journey visualization",
-    "You want a free tier to get started without a credit card",
+    "You want a 7-day free trial to evaluate before committing",
     "You need error tracking and Web Vitals monitoring",
     "You prefer events-based pricing over pageview-based",
     "You want full code transparency (AGPL v3)",
@@ -225,7 +224,6 @@ export const fathomExtendedData = {
     "You want the smallest possible tracking script (2KB)",
     "You prefer a more established product with a longer track record",
     "You only need basic pageview and conversion tracking",
-    "You want built-in email reports",
     "You don't want to worry about self-hosting or infrastructure",
   ],
 
@@ -234,8 +232,8 @@ export const fathomExtendedData = {
     model: "Events-based pricing",
     startingPrice: "$19/mo",
     highlights: [
-      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
-      "Session replay included on all plans",
+      "7-day free trial, no credit card required",
+      "Session replay available on Pro plan",
       "Funnels, user journeys, and error tracking included",
       "Self-hosting option available (free)",
     ],
@@ -264,7 +262,7 @@ export const fathomExtendedData = {
     },
     {
       question: "How does pricing compare between Rybbit and Fathom?",
-      answer: "Rybbit starts at $19/month with events-based pricing and includes a free tier. Fathom starts at $15/month with pageview-based pricing and no free tier. Rybbit includes significantly more features at a comparable price point.",
+      answer: "Rybbit starts at $19/month with events-based pricing and a 7-day free trial. Fathom starts at $15/month with pageview-based pricing. Rybbit includes significantly more features at a comparable price point, including session replay, funnels, and error tracking.",
     },
     {
       question: "Can I self-host Rybbit like I can with other tools?",

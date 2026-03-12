@@ -1,4 +1,3 @@
-import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
 import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const cloudflareAnalyticsComparisonData: ComparisonSection[] = [
@@ -254,7 +253,7 @@ export const cloudflareAnalyticsExtendedData = {
     model: "Events-based pricing",
     startingPrice: "$19/mo",
     highlights: [
-      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
+      "7-day free trial, no credit card required",
       "All features included on every plan",
       "100% unsampled, accurate data",
       "2-5+ years data retention",

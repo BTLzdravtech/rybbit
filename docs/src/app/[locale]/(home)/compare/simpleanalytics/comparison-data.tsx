@@ -1,4 +1,3 @@
-import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
 import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const simpleAnalyticsComparisonData: ComparisonSection[] = [
@@ -198,12 +197,12 @@ export const simpleAnalyticsExtendedData = {
     "You want city-level geolocation instead of country-level",
     "You need error tracking and Web Vitals monitoring",
     "You want organization support with team roles",
-    "You prefer a free tier to try before committing",
+    "You want a 7-day free trial to evaluate the product",
   ],
 
   chooseCompetitor: [
     "You want built-in AI-powered analytics assistant",
-    "You need automated email reports",
+    "You want a Mini plan with unlimited websites",
     "You prefer a longer-established product",
     "You don't need advanced features like funnels or session replay",
     "You want country-level data only for maximum privacy",
@@ -214,8 +213,8 @@ export const simpleAnalyticsExtendedData = {
     model: "Events-based pricing",
     startingPrice: "$19/mo",
     highlights: [
-      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
-      "Session replay included on all plans",
+      "7-day free trial, no credit card required",
+      "Session replay available on Pro plan",
       "Funnels, user journeys, and error tracking included",
       "Self-hosting option available (free)",
     ],

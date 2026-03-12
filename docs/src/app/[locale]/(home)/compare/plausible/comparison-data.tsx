@@ -1,4 +1,3 @@
-import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
 import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../components/ComparisonPage";
 
 export const plausibleComparisonData: ComparisonSection[] = [
@@ -221,14 +220,14 @@ export const plausibleComparisonData: ComparisonSection[] = [
     title: "Pricing & Support",
     features: [
       {
-        name: "Free tier",
-        rybbitValue: DEFAULT_EVENT_LIMIT.toLocaleString() + " events",
-        competitorValue: false,
+        name: "Free trial",
+        rybbitValue: "7 days",
+        competitorValue: "30 days",
       },
       {
         name: "Entry price",
         rybbitValue: "$19/mo",
-        competitorValue: "$19/mo",
+        competitorValue: "$9/mo",
       },
       {
         name: "Pricing model",
@@ -269,8 +268,8 @@ export const plausibleExtendedData = {
     model: "Events-based pricing",
     startingPrice: "$19/mo",
     highlights: [
-      `Free tier with ${DEFAULT_EVENT_LIMIT.toLocaleString()} events/month`,
-      "Session replay included on all plans",
+      "7-day free trial, no credit card required",
+      "Session replay available on Pro plan",
       "Funnels, user journeys, and error tracking included",
       "Unlimited team members and websites",
     ],
@@ -279,9 +278,9 @@ export const plausibleExtendedData = {
   competitorPricing: {
     name: "Plausible",
     model: "Pageview-based pricing",
-    startingPrice: "$19/mo",
+    startingPrice: "$9/mo",
     highlights: [
-      "No free tier available",
+      "30-day free trial available",
       "Starts at 10k monthly pageviews",
       "All features included on every plan",
       "Self-hosted Community Edition is free",
@@ -299,7 +298,7 @@ export const plausibleExtendedData = {
     },
     {
       question: "How does pricing compare between Rybbit and Plausible?",
-      answer: "Both start at $19/month. The key difference is that Rybbit uses events-based pricing (which includes pageviews, custom events, and more), while Plausible charges by pageviews only. Rybbit also offers a free tier that Plausible doesn't.",
+      answer: "Plausible starts at $9/month for 10k pageviews, while Rybbit starts at $19/month. The key difference is that Rybbit uses events-based pricing (which includes pageviews, custom events, and more) and includes advanced features like session replay, funnels, and error tracking that Plausible doesn't offer at any price.",
     },
     {
       question: "Can I self-host Rybbit like Plausible?",
@@ -307,7 +306,7 @@ export const plausibleExtendedData = {
     },
     {
       question: "Does Rybbit have session replay?",
-      answer: "Yes, session replay is one of the biggest differentiators. Rybbit includes session replay on all plans at no extra cost, allowing you to watch how users interact with your site. Plausible does not offer this feature.",
+      answer: "Yes, session replay is one of the biggest differentiators. Rybbit offers session replay on the Pro plan, allowing you to watch how users interact with your site. Plausible does not offer this feature at any price point.",
     },
   ] satisfies FAQItem[],
 
