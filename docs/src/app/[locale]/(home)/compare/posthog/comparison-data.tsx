@@ -195,16 +195,6 @@ export const posthogComparisonData: ComparisonSection[] = [
     title: "User Experience",
     features: [
       {
-        name: "Beautiful UI",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "No training required",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
         name: "Non-technical friendly",
         rybbitValue: true,
         competitorValue: false,
@@ -213,11 +203,6 @@ export const posthogComparisonData: ComparisonSection[] = [
         name: "Public dashboards",
         rybbitValue: true,
         competitorValue: true,
-      },
-      {
-        name: "Live demo",
-        rybbitValue: true,
-        competitorValue: false,
       },
       {
         name: "Mobile app",
@@ -233,11 +218,6 @@ export const posthogComparisonData: ComparisonSection[] = [
         name: "Script size",
         rybbitValue: "18KB",
         competitorValue: "~60KB",
-      },
-      {
-        name: "Real-time updates",
-        rybbitValue: true,
-        competitorValue: true,
       },
       {
         name: "API access",

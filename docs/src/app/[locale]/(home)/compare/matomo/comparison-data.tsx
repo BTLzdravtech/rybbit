@@ -14,21 +14,6 @@ export const matomoComparisonData: ComparisonSection[] = [
         rybbitValue: true,
         competitorValue: false,
       },
-      {
-        name: "No training required",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "One-click setup",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Beautiful modern UI",
-        rybbitValue: true,
-        competitorValue: false,
-      },
     ],
   },
   {
@@ -135,19 +120,9 @@ export const matomoComparisonData: ComparisonSection[] = [
         competitorValue: false,
       },
       {
-        name: "Modern tech stack",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
         name: "Auto-scaling cloud",
         rybbitValue: true,
         competitorValue: "Self-host only",
-      },
-      {
-        name: "Zero maintenance",
-        rybbitValue: true,
-        competitorValue: false,
       },
     ],
   },
@@ -238,16 +213,6 @@ export const matomoComparisonData: ComparisonSection[] = [
         name: "Open source",
         rybbitValue: true,
         competitorValue: true,
-      },
-      {
-        name: "Live demo available",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Documentation quality",
-        rybbitValue: "Modern",
-        competitorValue: "Extensive but complex",
       },
     ],
   },

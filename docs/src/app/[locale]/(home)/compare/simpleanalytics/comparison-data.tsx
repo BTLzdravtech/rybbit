@@ -145,17 +145,7 @@ export const simpleAnalyticsComparisonData: ComparisonSection[] = [
     title: "User Experience",
     features: [
       {
-        name: "No training required",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
         name: "Public dashboards",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Live demo",
         rybbitValue: true,
         competitorValue: true,
       },

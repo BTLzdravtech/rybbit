@@ -241,7 +241,7 @@ export function ComparisonPage({
                 {sections.map((section, sectionIndex) => (
                   <React.Fragment key={sectionIndex}>
                     <tr>
-                      <td colSpan={3} className="px-6 py-4 bg-neutral-200/70 dark:bg-neutral-900/70">
+                      <td colSpan={3} className="px-6 py-4 bg-neutral-200/70 dark:bg-neutral-800/50">
                         <span className="text-neutral-600 dark:text-neutral-400 text-sm font-medium">
                           {section.title}
                         </span>

@@ -175,22 +175,7 @@ export const googleAnalyticsComparisonData: ComparisonSection[] = [
     title: "Setup & Implementation",
     features: [
       {
-        name: "No training required",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "One-line installation",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
         name: "Self-hostable",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Modern tech stack",
         rybbitValue: true,
         competitorValue: false,
       },
@@ -211,11 +196,6 @@ export const googleAnalyticsComparisonData: ComparisonSection[] = [
       },
       {
         name: "Open source (AGPL v3)",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Live demo available",
         rybbitValue: true,
         competitorValue: false,
       },

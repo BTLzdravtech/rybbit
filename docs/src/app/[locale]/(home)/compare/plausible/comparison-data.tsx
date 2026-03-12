@@ -135,22 +135,7 @@ export const plausibleComparisonData: ComparisonSection[] = [
     title: "User Experience",
     features: [
       {
-        name: "Beautiful UI",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "No training required",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
         name: "Public dashboards",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Live demo",
         rybbitValue: true,
         competitorValue: true,
       },
@@ -159,11 +144,6 @@ export const plausibleComparisonData: ComparisonSection[] = [
   {
     title: "Performance & Technical",
     features: [
-      {
-        name: "Real-time updates",
-        rybbitValue: true,
-        competitorValue: true,
-      },
       {
         name: "API access",
         rybbitValue: true,

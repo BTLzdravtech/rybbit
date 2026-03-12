@@ -140,11 +140,6 @@ export const cloudflareAnalyticsComparisonData: ComparisonSection[] = [
     title: "Implementation & Setup",
     features: [
       {
-        name: "One-line installation",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
         name: "Works without CDN",
         rybbitValue: true,
         competitorValue: false,
@@ -200,11 +195,6 @@ export const cloudflareAnalyticsComparisonData: ComparisonSection[] = [
         competitorValue: false,
       },
       {
-        name: "Dedicated product focus",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
         name: "API access",
         rybbitValue: true,
         competitorValue: false,
@@ -218,11 +208,6 @@ export const cloudflareAnalyticsComparisonData: ComparisonSection[] = [
         name: "Organization support",
         rybbitValue: true,
         competitorValue: true,
-      },
-      {
-        name: "Live demo available",
-        rybbitValue: true,
-        competitorValue: false,
       },
     ],
   },

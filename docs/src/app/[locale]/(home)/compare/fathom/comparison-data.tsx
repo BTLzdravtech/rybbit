@@ -130,11 +130,6 @@ export const fathomComparisonData: ComparisonSection[] = [
         competitorValue: false,
       },
       {
-        name: "Code transparency",
-        rybbitValue: "Full",
-        competitorValue: "None",
-      },
-      {
         name: "License",
         rybbitValue: "AGPL v3",
         competitorValue: "Proprietary",
@@ -144,11 +139,6 @@ export const fathomComparisonData: ComparisonSection[] = [
   {
     title: "User Experience",
     features: [
-      {
-        name: "Beautiful UI",
-        rybbitValue: true,
-        competitorValue: true,
-      },
       {
         name: "Public dashboards",
         rybbitValue: true,
