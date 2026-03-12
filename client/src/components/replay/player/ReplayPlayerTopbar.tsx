@@ -21,11 +21,6 @@ function getDisplayPath(url: string): string {
   }
 }
 
-interface PageTransition {
-  time: number;
-  url: string;
-}
-
 export function ReplayPlayerTopbar() {
   const params = useParams();
   const siteId = Number(params.site);
@@ -38,48 +33,28 @@ export function ReplayPlayerTopbar() {
   const { metadata } = data ?? {};
   const screenDimensions = `${metadata?.screen_width} × ${metadata?.screen_height}`;
 
-  // Pre-compute sorted page transitions for binary search
-  const pageTransitions = useMemo((): PageTransition[] => {
-    if (!data?.events) return [];
-
-    const firstTimestamp = data.events[0]?.timestamp ?? 0;
-    const transitions: PageTransition[] = [];
-
-    for (const event of data.events) {
-      if (event.type === 4 && event.data?.href) {
-        transitions.push({
-          time: event.timestamp - firstTimestamp,
-          url: event.data.href,
-        });
-      }
-    }
-
-    return transitions;
+  const pageViewEvents = useMemo(() => {
+    return data?.events?.filter((event: any) => Number(event.type) === 4);
   }, [data?.events]);
 
-  // Binary search for current page URL
+  // Get the current page URL based on the replay currentTime
   const pageUrl = useMemo(() => {
-    if (pageTransitions.length === 0 || currentTime === 0) {
+    if (!pageViewEvents || pageViewEvents.length === 0 || currentTime === 0) {
       return metadata?.page_url;
     }
 
-    // Binary search: find the last transition where time <= currentTime
-    let lo = 0;
-    let hi = pageTransitions.length - 1;
-    let result = -1;
+    let currentUrl = metadata?.page_url;
+    const firstTimestamp = pageViewEvents[0].timestamp;
 
-    while (lo <= hi) {
-      const mid = (lo + hi) >>> 1;
-      if (pageTransitions[mid].time <= currentTime) {
-        result = mid;
-        lo = mid + 1;
-      } else {
-        hi = mid - 1;
+    for (const event of pageViewEvents) {
+      if (event.timestamp - firstTimestamp > currentTime) break;
+      if (event.data?.href) {
+        currentUrl = event.data.href;
       }
     }
 
-    return result >= 0 ? pageTransitions[result].url : metadata?.page_url;
-  }, [pageTransitions, currentTime, metadata?.page_url]);
+    return currentUrl;
+  }, [pageViewEvents, currentTime, metadata?.page_url]);
 
   if (!pageUrl || !metadata) {
     return (

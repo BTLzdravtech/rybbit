@@ -245,11 +245,10 @@ export function ReplayBreadcrumbs() {
       if (!player || !firstTimestamp) return;
 
       const timeInMs = timestamp - firstTimestamp;
-      const timeInSeconds = timeInMs / 1000;
 
       // Seek to the specific time
       player.goto(timeInMs);
-      setCurrentTime(timeInSeconds);
+      setCurrentTime(timeInMs);
     },
     [player, firstTimestamp, setCurrentTime]
   );
