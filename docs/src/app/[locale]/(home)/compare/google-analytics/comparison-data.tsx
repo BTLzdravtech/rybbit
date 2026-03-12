@@ -2,203 +2,45 @@ import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../com
 
 export const googleAnalyticsComparisonData: ComparisonSection[] = [
   {
-    title: "Privacy & Compliance",
-    features: [
-      {
-        name: "GDPR compliant without cookie banner",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "CCPA compliant",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "No personal data collection",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Cookie-free tracking",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "100% data ownership",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Daily rotating salt option",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-    ],
-  },
-  {
-    title: "Performance & Accuracy",
-    features: [
-      {
-        name: "Script size",
-        rybbitValue: "18KB",
-        competitorValue: "371KB",
-      },
-      {
-        name: "Real-time data",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "No data sampling",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Bot filtering",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Bypasses ad blockers",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Data retention",
-        rybbitValue: "2-5+ years",
-        competitorValue: "2-14 months",
-      },
-    ],
-  },
-  {
     title: "Analytics Features",
     features: [
-      {
-        name: "Web analytics dashboard",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Simple, intuitive interface",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Real-time globe view",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Web Vitals dashboard",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Custom events with attributes",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Conversion goals",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Funnels",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "User journeys (Sankey)",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "UTM tracking",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Public dashboards",
-        rybbitValue: true,
-        competitorValue: false,
-      },
+      { name: "Real-time analytics", rybbitValue: true, competitorValue: true },
+      { name: "Custom events", rybbitValue: "With attributes", competitorValue: true },
+      { name: "Funnels", rybbitValue: true, competitorValue: true },
+      { name: "User journeys (Sankey)", rybbitValue: true, competitorValue: true },
+      { name: "Conversion goals", rybbitValue: true, competitorValue: true },
+      { name: "UTM tracking", rybbitValue: true, competitorValue: true },
+      { name: "Public dashboards", rybbitValue: true, competitorValue: false },
     ],
   },
   {
     title: "Advanced Features",
     features: [
-      {
-        name: "Session Replay",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "User profiles",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Sessions page",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Error tracking",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Organization support",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Team collaboration",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Geolocation (city-level)",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Device & browser tracking",
-        rybbitValue: true,
-        competitorValue: true,
-      },
+      { name: "Session Replay", rybbitValue: true, competitorValue: false },
+      { name: "User profiles", rybbitValue: true, competitorValue: false },
+      { name: "Web Vitals monitoring", rybbitValue: true, competitorValue: true },
+      { name: "Error tracking", rybbitValue: true, competitorValue: false },
+      { name: "Real-time globe view", rybbitValue: true, competitorValue: false },
+      { name: "Autocapture", rybbitValue: true, competitorValue: false },
     ],
   },
   {
-    title: "Setup & Implementation",
+    title: "Privacy & Open Source",
     features: [
-      {
-        name: "Self-hostable",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Custom dashboards",
-        rybbitValue: false,
-        competitorValue: true,
-      },
+      { name: "Cookie-free tracking", rybbitValue: true, competitorValue: false },
+      { name: "No personal data collection", rybbitValue: true, competitorValue: false },
+      { name: "Daily rotating salt", rybbitValue: true, competitorValue: false },
+      { name: "Open source", rybbitValue: true, competitorValue: false },
+      { name: "Self-hostable", rybbitValue: true, competitorValue: false },
     ],
   },
   {
-    title: "Other",
+    title: "Technical & Pricing",
     features: [
-      {
-        name: "Human customer support",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Open source (AGPL v3)",
-        rybbitValue: true,
-        competitorValue: false,
-      },
+      { name: "Script size", rybbitValue: "18KB", competitorValue: "371KB" },
+      { name: "Bypasses ad blockers", rybbitValue: true, competitorValue: false },
+      { name: "API access", rybbitValue: true, competitorValue: true },
+      { name: "Starting price", rybbitValue: "$19/mo", competitorValue: "Free" },
     ],
   },
 ];

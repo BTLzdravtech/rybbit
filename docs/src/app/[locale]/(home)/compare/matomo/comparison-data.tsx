@@ -2,218 +2,45 @@ import { ComparisonSection, FAQItem, PricingInfo, RelatedResource } from "../com
 
 export const matomoComparisonData: ComparisonSection[] = [
   {
-    title: "Ease of Use",
+    title: "Analytics Features",
     features: [
-      {
-        name: "Simple, intuitive interface",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Single-page dashboard",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-    ],
-  },
-  {
-    title: "Core Analytics Features",
-    features: [
-      {
-        name: "Web analytics dashboard",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Real-time data",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Custom events tracking",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Conversion goals",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Ecommerce tracking",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Heatmaps",
-        rybbitValue: false,
-        competitorValue: true,
-      },
-      {
-        name: "A/B testing",
-        rybbitValue: false,
-        competitorValue: true,
-      },
-      {
-        name: "Form analytics",
-        rybbitValue: false,
-        competitorValue: true,
-      },
+      { name: "Real-time analytics", rybbitValue: true, competitorValue: true },
+      { name: "Custom events", rybbitValue: "With attributes", competitorValue: true },
+      { name: "Funnels", rybbitValue: true, competitorValue: true },
+      { name: "User journeys (Sankey)", rybbitValue: true, competitorValue: false },
+      { name: "Conversion goals", rybbitValue: true, competitorValue: true },
+      { name: "UTM tracking", rybbitValue: true, competitorValue: true },
+      { name: "Public dashboards", rybbitValue: true, competitorValue: false },
     ],
   },
   {
     title: "Advanced Features",
     features: [
-      {
-        name: "Session Replay",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Funnels",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "User journeys (Sankey)",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "User profiles",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Real-time globe view",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Web Vitals dashboard",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Error tracking",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Public dashboards",
-        rybbitValue: true,
-        competitorValue: false,
-      },
+      { name: "Session Replay", rybbitValue: true, competitorValue: true },
+      { name: "User profiles", rybbitValue: true, competitorValue: true },
+      { name: "Web Vitals monitoring", rybbitValue: true, competitorValue: false },
+      { name: "Error tracking", rybbitValue: true, competitorValue: false },
+      { name: "Real-time globe view", rybbitValue: true, competitorValue: false },
+      { name: "Autocapture", rybbitValue: true, competitorValue: false },
     ],
   },
   {
-    title: "Performance & Infrastructure",
+    title: "Privacy & Open Source",
     features: [
-      {
-        name: "Script size",
-        rybbitValue: "18KB",
-        competitorValue: "20-50KB",
-      },
-      {
-        name: "Global CDN included",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Auto-scaling cloud",
-        rybbitValue: true,
-        competitorValue: "Self-host only",
-      },
+      { name: "Cookie-free tracking", rybbitValue: true, competitorValue: "Optional" },
+      { name: "No personal data collection", rybbitValue: true, competitorValue: false },
+      { name: "Daily rotating salt", rybbitValue: true, competitorValue: false },
+      { name: "Open source", rybbitValue: true, competitorValue: true },
+      { name: "Self-hostable", rybbitValue: true, competitorValue: true },
     ],
   },
   {
-    title: "Privacy & Compliance",
+    title: "Technical & Pricing",
     features: [
-      {
-        name: "Cookie-free tracking",
-        rybbitValue: true,
-        competitorValue: "Optional",
-      },
-      // {
-      //   name: "GDPR compliant by default",
-      //   rybbitValue: true,
-      //   competitorValue: false,
-      // },
-      {
-        name: "No consent banner needed",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Daily rotating salt option",
-        rybbitValue: true,
-        competitorValue: false,
-      },
-      {
-        name: "Data stored in EU",
-        rybbitValue: true,
-        competitorValue: "Varies",
-      },
-    ],
-  },
-  {
-    title: "Data & Hosting",
-    features: [
-      {
-        name: "Data retention",
-        rybbitValue: "2-5+ years",
-        competitorValue: "24 months (cloud)",
-      },
-      {
-        name: "Self-hostable",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "Managed cloud option",
-        rybbitValue: true,
-        competitorValue: "Limited",
-      },
-      {
-        name: "Easy Google Analytics import",
-        rybbitValue: false,
-        competitorValue: "Complex",
-      },
-      {
-        name: "Data export",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-      {
-        name: "API access",
-        rybbitValue: true,
-        competitorValue: true,
-      },
-    ],
-  },
-  {
-    title: "Support & Pricing",
-    features: [
-      {
-        name: "Human customer support",
-        rybbitValue: true,
-        competitorValue: "Paid only",
-      },
-      {
-        name: "Free trial",
-        rybbitValue: "7 days",
-        competitorValue: "Self-host only",
-      },
-      {
-        name: "Cloud pricing",
-        rybbitValue: "$19-$499/mo",
-        competitorValue: "€19-€450+/mo",
-      },
-      {
-        name: "Open source",
-        rybbitValue: true,
-        competitorValue: true,
-      },
+      { name: "Script size", rybbitValue: "18KB", competitorValue: "20-50KB" },
+      { name: "Bypasses ad blockers", rybbitValue: true, competitorValue: false },
+      { name: "API access", rybbitValue: true, competitorValue: true },
+      { name: "Starting price", rybbitValue: "$19/mo", competitorValue: "\u20AC19/mo" },
     ],
   },
 ];
