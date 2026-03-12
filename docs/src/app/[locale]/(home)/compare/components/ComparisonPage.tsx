@@ -55,6 +55,8 @@ export interface ComparisonPageProps {
   sections: ComparisonSection[];
   comparisonContent?: React.ReactNode;
   subtitle?: string;
+  introHeading?: string;
+  introParagraphs?: string[];
   chooseRybbit?: string[];
   chooseCompetitor?: string[];
   rybbitPricing?: PricingInfo;
@@ -68,6 +70,8 @@ export function ComparisonPage({
   sections,
   comparisonContent,
   subtitle,
+  introHeading,
+  introParagraphs,
   chooseRybbit,
   chooseCompetitor,
   rybbitPricing,
@@ -137,6 +141,22 @@ export function ComparisonPage({
           </p>
         </div>
       </div>
+
+      {/* Intro paragraphs */}
+      {introHeading && introParagraphs && introParagraphs.length > 0 && (
+        <section className="w-full max-w-5xl mx-auto px-4 z-10 pb-4">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
+            {introHeading}
+          </h2>
+          <div className="space-y-4">
+            {introParagraphs.map((paragraph, index) => (
+              <p key={index} className="text-neutral-600 dark:text-neutral-300 leading-relaxed font-light">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Which is right for you? */}
       {chooseRybbit && chooseCompetitor && (

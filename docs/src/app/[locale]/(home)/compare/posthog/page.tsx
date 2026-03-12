@@ -80,6 +80,8 @@ export default function PostHog() {
         competitorName="PostHog"
         sections={posthogComparisonData}
         subtitle={posthogExtendedData.subtitle}
+        introHeading={posthogExtendedData.introHeading}
+        introParagraphs={posthogExtendedData.introParagraphs}
         chooseRybbit={posthogExtendedData.chooseRybbit}
         chooseCompetitor={posthogExtendedData.chooseCompetitor}
         rybbitPricing={posthogExtendedData.rybbitPricing}

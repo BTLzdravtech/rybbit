@@ -80,6 +80,8 @@ export default function CloudflareAnalytics() {
         competitorName="Cloudflare Analytics"
         sections={cloudflareAnalyticsComparisonData}
         subtitle={cloudflareAnalyticsExtendedData.subtitle}
+        introHeading={cloudflareAnalyticsExtendedData.introHeading}
+        introParagraphs={cloudflareAnalyticsExtendedData.introParagraphs}
         chooseRybbit={cloudflareAnalyticsExtendedData.chooseRybbit}
         chooseCompetitor={cloudflareAnalyticsExtendedData.chooseCompetitor}
         rybbitPricing={cloudflareAnalyticsExtendedData.rybbitPricing}

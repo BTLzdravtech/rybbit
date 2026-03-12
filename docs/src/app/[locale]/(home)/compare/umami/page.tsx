@@ -80,6 +80,8 @@ export default function Umami() {
         competitorName="Umami"
         sections={umamiComparisonData}
         subtitle={umamiExtendedData.subtitle}
+        introHeading={umamiExtendedData.introHeading}
+        introParagraphs={umamiExtendedData.introParagraphs}
         chooseRybbit={umamiExtendedData.chooseRybbit}
         chooseCompetitor={umamiExtendedData.chooseCompetitor}
         rybbitPricing={umamiExtendedData.rybbitPricing}

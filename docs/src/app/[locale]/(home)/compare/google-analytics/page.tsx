@@ -81,6 +81,8 @@ export default function GoogleAnalytics() {
         competitorName="Google Analytics"
         sections={googleAnalyticsComparisonData}
         subtitle={googleAnalyticsExtendedData.subtitle}
+        introHeading={googleAnalyticsExtendedData.introHeading}
+        introParagraphs={googleAnalyticsExtendedData.introParagraphs}
         chooseRybbit={googleAnalyticsExtendedData.chooseRybbit}
         chooseCompetitor={googleAnalyticsExtendedData.chooseCompetitor}
         rybbitPricing={googleAnalyticsExtendedData.rybbitPricing}

@@ -80,6 +80,8 @@ export default function Matomo() {
         competitorName="Matomo"
         sections={matomoComparisonData}
         subtitle={matomoExtendedData.subtitle}
+        introHeading={matomoExtendedData.introHeading}
+        introParagraphs={matomoExtendedData.introParagraphs}
         chooseRybbit={matomoExtendedData.chooseRybbit}
         chooseCompetitor={matomoExtendedData.chooseCompetitor}
         rybbitPricing={matomoExtendedData.rybbitPricing}

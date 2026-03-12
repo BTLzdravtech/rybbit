@@ -226,6 +226,13 @@ export const googleAnalyticsComparisonData: ComparisonSection[] = [
 export const googleAnalyticsExtendedData = {
   subtitle: "See why privacy-conscious teams are switching from GA4 to Rybbit's open-source, cookie-free analytics.",
 
+  introHeading: "Why consider Rybbit over Google Analytics?",
+  introParagraphs: [
+    "Google Analytics is the default choice for most websites, but that doesn't mean it's the best one. GA4's transition left many teams frustrated with a steep learning curve, confusing interface, and data sampling that makes reports unreliable at scale. Meanwhile, privacy regulations like GDPR have made GA4's cookie-dependent tracking a liability — multiple EU countries have ruled it non-compliant.",
+    "Rybbit takes a fundamentally different approach. Instead of harvesting user data to power an ad network, Rybbit exists solely to give you accurate, actionable analytics. It's cookie-free by default, so you never need consent banners. The single-page dashboard shows everything your team needs without digging through 150+ reports. And because it's open source, you can verify exactly how your data is handled.",
+    "The feature gap isn't what you'd expect either. Rybbit includes session replay, funnel analysis, user journey visualization, and real-time data without sampling — capabilities that GA4 either lacks or locks behind the $50,000/year GA360 tier. For teams that want powerful analytics without the complexity, privacy concerns, or vendor lock-in, Rybbit is the modern alternative GA4 should have been.",
+  ],
+
   chooseRybbit: [
     "You want privacy-first analytics without cookie banners",
     "You need a simple dashboard your whole team can understand",

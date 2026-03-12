@@ -80,6 +80,8 @@ export default function SimpleAnalytics() {
         competitorName="Simple Analytics"
         sections={simpleAnalyticsComparisonData}
         subtitle={simpleAnalyticsExtendedData.subtitle}
+        introHeading={simpleAnalyticsExtendedData.introHeading}
+        introParagraphs={simpleAnalyticsExtendedData.introParagraphs}
         chooseRybbit={simpleAnalyticsExtendedData.chooseRybbit}
         chooseCompetitor={simpleAnalyticsExtendedData.chooseCompetitor}
         rybbitPricing={simpleAnalyticsExtendedData.rybbitPricing}

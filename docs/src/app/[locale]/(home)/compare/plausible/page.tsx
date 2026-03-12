@@ -80,6 +80,8 @@ export default function Plausible() {
         competitorName="Plausible"
         sections={plausibleComparisonData}
         subtitle={plausibleExtendedData.subtitle}
+        introHeading={plausibleExtendedData.introHeading}
+        introParagraphs={plausibleExtendedData.introParagraphs}
         chooseRybbit={plausibleExtendedData.chooseRybbit}
         chooseCompetitor={plausibleExtendedData.chooseCompetitor}
         rybbitPricing={plausibleExtendedData.rybbitPricing}

@@ -231,6 +231,13 @@ export const cloudflareAnalyticsComparisonData: ComparisonSection[] = [
 export const cloudflareAnalyticsExtendedData = {
   subtitle: "Cloudflare Analytics is free but limited — Rybbit gives you accurate, unsampled data with the features you actually need.",
 
+  introHeading: "Why consider Rybbit over Cloudflare Analytics?",
+  introParagraphs: [
+    "Cloudflare Web Analytics is free and requires no setup if you're already using Cloudflare's CDN. But free comes with serious limitations. Cloudflare only samples about 10% of your traffic and extrapolates the rest, which means your visitor counts are estimates, not facts. Data is retained for just 6 months, and there's no support for custom events, conversion goals, UTM tracking, or even basic metrics like bounce rate and visit duration.",
+    "Rybbit processes 100% of your events with zero sampling, so every number in your dashboard is accurate. You get the full analytics toolkit — custom events with attributes, conversion goals, funnel analysis, session replay, user journey visualization, and 2-5+ years of data retention. Plus, Rybbit works with any website regardless of hosting provider, so you're not locked into Cloudflare's CDN.",
+    "Think of Cloudflare Analytics as a basic traffic counter and Rybbit as a complete analytics platform. If you just need to know roughly how many people visited your site, Cloudflare is fine. But if you want to understand user behavior, optimize conversions, debug issues with session replay, or make data-driven decisions with accurate numbers, Rybbit is what you need.",
+  ],
+
   chooseRybbit: [
     "You need 100% accurate data without sampling (Cloudflare uses 10% samples)",
     "You want full analytics features: UTM tracking, custom events, goals, funnels",

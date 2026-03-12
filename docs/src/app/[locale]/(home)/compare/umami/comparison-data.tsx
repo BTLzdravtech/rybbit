@@ -251,6 +251,13 @@ export const umamiComparisonData: ComparisonSection[] = [
 export const umamiExtendedData = {
   subtitle: "Both are open source and privacy-first, but Rybbit offers session replay, funnels, and user journeys that Umami doesn't.",
 
+  introHeading: "Why consider Rybbit over Umami?",
+  introParagraphs: [
+    "Umami is a popular open-source analytics tool known for its tiny 2KB script and simple, clean interface. It's a solid choice for personal blogs and small sites that just need basic traffic metrics. But Umami's simplicity comes at the cost of advanced features — there's no session replay, no error tracking, no Web Vitals monitoring, and limited organization support for teams.",
+    "Rybbit shares Umami's open-source DNA and privacy-first values but offers a much deeper feature set. You get session replay to watch how users interact with your site, funnel analysis to find conversion bottlenecks, user journey visualization with Sankey diagrams, and error tracking to catch issues before your users report them. All while maintaining the clean, intuitive dashboard experience that makes simple analytics tools appealing.",
+    "On the technical side, Rybbit uses ClickHouse for analytics queries, delivering fast performance even at high traffic volumes. Umami supports PostgreSQL and MySQL for self-hosting, which may be more familiar but can struggle with large datasets. Rybbit also offers a mature managed cloud service, so you don't have to maintain infrastructure if you'd rather not. If you've outgrown Umami's basic metrics and need analytics that can grow with your product, Rybbit is the natural next step.",
+  ],
+
   chooseRybbit: [
     "You need session replay to see how users interact with your site",
     "You want error tracking and Web Vitals monitoring built in",

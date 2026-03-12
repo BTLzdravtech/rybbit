@@ -80,6 +80,8 @@ export default function Fathom() {
         competitorName="Fathom"
         sections={fathomComparisonData}
         subtitle={fathomExtendedData.subtitle}
+        introHeading={fathomExtendedData.introHeading}
+        introParagraphs={fathomExtendedData.introParagraphs}
         chooseRybbit={fathomExtendedData.chooseRybbit}
         chooseCompetitor={fathomExtendedData.chooseCompetitor}
         rybbitPricing={fathomExtendedData.rybbitPricing}

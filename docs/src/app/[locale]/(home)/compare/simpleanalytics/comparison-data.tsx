@@ -191,6 +191,13 @@ export const simpleAnalyticsComparisonData: ComparisonSection[] = [
 export const simpleAnalyticsExtendedData = {
   subtitle: "Both prioritize privacy, but Rybbit is open source with session replay, funnels, and city-level geolocation that Simple Analytics lacks.",
 
+  introHeading: "Why consider Rybbit over Simple Analytics?",
+  introParagraphs: [
+    "Simple Analytics lives up to its name — it's a privacy-focused analytics tool that keeps things minimal. It offers a clean dashboard, cookie-free tracking, and EU-based data storage. But its simplicity means no session replay, no funnel analysis, no user journeys, and only country-level geolocation. It's also entirely closed-source with no self-hosting option.",
+    "Rybbit matches Simple Analytics on privacy — cookie-free, no personal data collection, EU data storage — but adds the advanced features growing teams actually need. Session replay lets you watch how users interact with your site. Funnel analysis shows where visitors drop off in your conversion flow. User journey visualization reveals the paths people take through your content. And city-level geolocation gives you much more granular insights into where your audience is.",
+    "The business model difference matters too. Rybbit is fully open source under AGPL v3, so you can self-host it for free and verify exactly how your data is handled. Simple Analytics is proprietary — you're locked into their cloud service with no alternative. If you want privacy-first analytics with the depth to actually improve your product and the transparency of open source, Rybbit is the stronger choice.",
+  ],
+
   chooseRybbit: [
     "You want open-source software you can self-host and audit",
     "You need session replay, funnels, and user journey visualization",
