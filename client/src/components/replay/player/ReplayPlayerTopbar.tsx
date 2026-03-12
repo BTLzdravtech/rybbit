@@ -10,6 +10,21 @@ import {
 } from "@/components/TooltipIcons/TooltipIcons";
 import { useReplayStore } from "../replayStore";
 
+// Extract pathname from full URL for display
+function getDisplayPath(url: string): string {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.hostname + urlObj.pathname + urlObj.search + urlObj.hash;
+  } catch {
+    return url;
+  }
+}
+
+interface PageTransition {
+  time: number;
+  url: string;
+}
+
 export function ReplayPlayerTopbar() {
   const params = useParams();
   const siteId = Number(params.site);
@@ -20,29 +35,48 @@ export function ReplayPlayerTopbar() {
   const { metadata } = data ?? {};
   const screenDimensions = `${metadata?.screen_width} × ${metadata?.screen_height}`;
 
-  const pageViewEvents = useMemo(() => {
-    return data?.events?.filter(event => event.type === 4);
-  }, [data?.events]);
+  // Pre-compute sorted page transitions for binary search
+  const pageTransitions = useMemo((): PageTransition[] => {
+    if (!data?.events) return [];
 
-  // Get the current page URL based on the replay currentTime
-  const pageUrl = useMemo(() => {
-    if (!pageViewEvents || currentTime === 0) {
-      return metadata?.page_url;
-    }
+    const firstTimestamp = data.events[0]?.timestamp ?? 0;
+    const transitions: PageTransition[] = [];
 
-    let currentUrl = metadata?.page_url;
-    const firstTimestamp = pageViewEvents[0].timestamp;
-
-    // Find the most recent Meta event (type 4) with href before currentTime
-    for (const event of pageViewEvents) {
-      if (event.timestamp - firstTimestamp > currentTime) break;
-      if (event.data?.href) {
-        currentUrl = event.data.href;
+    for (const event of data.events) {
+      if (event.type === 4 && event.data?.href) {
+        transitions.push({
+          time: event.timestamp - firstTimestamp,
+          url: event.data.href,
+        });
       }
     }
 
-    return currentUrl;
-  }, [pageViewEvents, currentTime, metadata?.page_url]);
+    return transitions;
+  }, [data?.events]);
+
+  // Binary search for current page URL
+  const pageUrl = useMemo(() => {
+    if (pageTransitions.length === 0 || currentTime === 0) {
+      return metadata?.page_url;
+    }
+
+    // Binary search: find the last transition where time <= currentTime
+    let lo = 0;
+    let hi = pageTransitions.length - 1;
+    let result = -1;
+
+    while (lo <= hi) {
+      const mid = (lo + hi) >>> 1;
+      if (pageTransitions[mid].time <= currentTime) {
+        result = mid;
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+
+    return result >= 0 ? pageTransitions[result].url : metadata?.page_url;
+  }, [pageTransitions, currentTime, metadata?.page_url]);
 
   if (!pageUrl || !metadata) {
     return (
@@ -58,16 +92,6 @@ export function ReplayPlayerTopbar() {
       </div>
     );
   }
-
-  // Extract pathname from full URL for display
-  const getDisplayPath = (url: string): string => {
-    try {
-      const urlObj = new URL(url);
-      return urlObj.hostname + urlObj.pathname + urlObj.search + urlObj.hash;
-    } catch {
-      return url;
-    }
-  };
 
   return (
     <div className="border border-neutral-100 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-2 py-2 rounded-t-lg overflow-hidden">

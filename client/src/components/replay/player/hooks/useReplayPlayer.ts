@@ -11,8 +11,16 @@ interface UseReplayPlayerProps {
 
 export const useReplayPlayer = ({ data, width, height }: UseReplayPlayerProps) => {
   const playerContainerRef = useRef<HTMLDivElement>(null);
-  const { setPlayer, setCurrentTime, setIsPlaying, setDuration, setActivityPeriods } = useReplayStore();
+  const playerRef = useRef<any>(null);
+  const { setPlayer, setCurrentTime, setIsPlaying, setDuration } = useReplayStore();
 
+  // Store width/height in refs for the resize effect
+  const widthRef = useRef(width);
+  const heightRef = useRef(height);
+  widthRef.current = width;
+  heightRef.current = height;
+
+  // Initialize player when data changes
   useEffect(() => {
     if (data?.events && playerContainerRef.current) {
       // Clear any existing content first
@@ -27,14 +35,15 @@ export const useReplayPlayer = ({ data, width, height }: UseReplayPlayerProps) =
           target: playerContainerRef.current,
           props: {
             events: data.events as any, // Cast to any to handle type compatibility with rrweb
-            width: width,
+            width: widthRef.current,
             // subtract for the custom controls
-            height: height - CONTROLS_HEIGHT,
+            height: heightRef.current - CONTROLS_HEIGHT,
             autoPlay: false,
             showController: false, // We'll use custom controls
           },
         });
 
+        playerRef.current = newPlayer;
         setPlayer(newPlayer);
 
         // Set up event listeners
@@ -117,10 +126,22 @@ export const useReplayPlayer = ({ data, width, height }: UseReplayPlayerProps) =
         if (handleVisibilityChange) {
           document.removeEventListener("visibilitychange", handleVisibilityChange);
         }
+        playerRef.current = null;
         setPlayer(null);
       };
     }
-  }, [data, width, height, setPlayer, setCurrentTime, setIsPlaying, setDuration, setActivityPeriods]);
+  }, [data, setPlayer, setCurrentTime, setIsPlaying, setDuration]);
+
+  // Update dimensions without recreating the player
+  useEffect(() => {
+    if (playerRef.current) {
+      playerRef.current.$set({
+        width,
+        height: height - CONTROLS_HEIGHT,
+      });
+      playerRef.current.triggerResize();
+    }
+  }, [width, height]);
 
   return { playerContainerRef };
 };
