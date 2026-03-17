@@ -20,7 +20,7 @@ class R2StorageService {
 
   constructor() {
     // Only initialize R2 in cloud environment
-    if (IS_CLOUD && process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY) {
+    if (/* BTL change - IS_CLOUD && */process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY) {
       // Create a custom HTTP handler that strips checksum headers
       const httpHandler = new NodeHttpHandler();
       const originalHandle = httpHandler.handle.bind(httpHandler);
@@ -42,7 +42,7 @@ class R2StorageService {
 
       this.client = new S3Client({
         region: "auto",
-        endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+        endpoint: `https://${process.env.R2_ACCOUNT_ID}`, // BTL change
         credentials: {
           accessKeyId: process.env.R2_ACCESS_KEY_ID,
           secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
