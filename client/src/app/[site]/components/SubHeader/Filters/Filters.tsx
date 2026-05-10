@@ -43,15 +43,6 @@ export function Filters({ availableFilters }: { availableFilters?: FilterParamet
       case "lon": return t("Lon");
       case "hostname": return t("Hostname");
       case "timezone": return t("Timezone");
-      case "vpn": return t("VPN");
-      case "crawler": return t("Crawler");
-      case "datacenter": return t("Datacenter");
-      case "company": return t("Company");
-      case "company_type": return t("Company Type");
-      case "company_domain": return t("Company Domain");
-      case "asn_org": return t("ASN Org");
-      case "asn_type": return t("ASN Type");
-      case "asn_domain": return t("ASN Domain");
       case "tag": return t("Tag");
       default: return parameter;
     }

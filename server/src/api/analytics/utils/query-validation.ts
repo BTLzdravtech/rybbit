@@ -222,15 +222,6 @@ export const filterParamSchema = z.enum([
   "lat",
   "lon",
   "timezone",
-  "vpn",
-  "crawler",
-  "datacenter",
-  "company",
-  "company_type",
-  "company_domain",
-  "asn_org",
-  "asn_type",
-  "asn_domain",
   "tag",
 ]);
 

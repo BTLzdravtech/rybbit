@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../../../components/ui/tooltip";
 import { FilterOptions, StringOperatorOptions, NumericOperatorOptions, isNumericParameter } from "./const";
 import { ValueSelect } from "./ValueSelect";
-import { IS_CLOUD } from "../../../../../lib/const";
 
 // Validate regex pattern and return error message if invalid
 function validateRegex(pattern: string): string | null {
@@ -75,24 +74,13 @@ export function FilterComponent({
       case "lon": return t("Lon");
       case "tag": return t("Tag");
       case "timezone": return t("Timezone");
-      case "vpn": return t("VPN");
-      case "crawler": return t("Crawler");
-      case "datacenter": return t("Datacenter");
-      case "company": return t("Company");
-      case "company_type": return t("Company Type");
-      case "company_domain": return t("Company Domain");
-      case "asn_org": return t("ASN Org");
-      case "asn_type": return t("ASN Type");
-      case "asn_domain": return t("ASN Domain");
       default: return value;
     }
   };
 
   const availableFilterOptions = availableFilters
-    ? FilterOptions.filter(option => availableFilters?.includes(option.value)).filter(
-      option => IS_CLOUD || !option.cloudOnly
-    )
-    : FilterOptions.filter(option => IS_CLOUD || !option.cloudOnly);
+    ? FilterOptions.filter(option => availableFilters?.includes(option.value))
+    : FilterOptions;
 
   const isNumeric = isNumericParameter(filter.parameter);
   const operatorOptions = isNumeric ? NumericOperatorOptions : StringOperatorOptions;
