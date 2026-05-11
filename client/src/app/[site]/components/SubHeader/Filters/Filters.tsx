@@ -10,7 +10,13 @@ import { useGetRegionName } from "../../../../../lib/geo";
 import { removeFilter, updateFilter, useStore } from "../../../../../lib/store";
 import { cn } from "../../../../../lib/utils";
 import { isNumericParameter } from "./const";
-import { formatDisplayValue, getOperatorLabel, getParameterLabel } from "./labels";
+import {
+  formatDisplayValue,
+  getOperatorLabel,
+  getParameterIcon,
+  getParameterLabel,
+  operatorNeedsValue,
+} from "./labels";
 import { OperatorPopover } from "./OperatorPopover";
 import { ParameterPopover } from "./ParameterPopover";
 import { ValuePopover } from "./ValuePopover";
@@ -42,12 +48,13 @@ export function Filters({ availableFilters }: { availableFilters?: FilterParamet
                 size="sm"
                 disabled={disabled}
                 className={cn(
-                  "font-normal py-1.5 px-2",
+                  "font-normal py-1.5 px-2 gap-1.5",
                   disabled
                     ? "text-neutral-400 dark:text-neutral-500"
                     : "text-neutral-700 dark:text-neutral-100"
                 )}
               >
+                {getParameterIcon(filter.parameter)}
                 {getParameterLabel(filter.parameter, t)}
               </Button>
             </ParameterPopover>
@@ -61,22 +68,24 @@ export function Filters({ availableFilters }: { availableFilters?: FilterParamet
                 {getOperatorLabel(filter.type, isNumeric, t)}
               </Button>
             </OperatorPopover>
-            <ValuePopover filter={filter} onUpdate={onUpdate}>
-              <Button
-                variant="secondary"
-                size="sm"
-                disabled={disabled}
-                className={cn(
-                  "max-w-[260px] truncate py-1.5 px-2",
-                  hasValue
-                    ? "text-neutral-900 dark:text-neutral-100 font-medium"
-                    : "text-neutral-500 dark:text-neutral-400 italic font-normal",
-                  disabled && "text-neutral-400 dark:text-neutral-500"
-                )}
-              >
-                <span className="truncate">{hasValue ? displayValue : t("pick value")}</span>
-              </Button>
-            </ValuePopover>
+            {operatorNeedsValue(filter.type) && (
+              <ValuePopover filter={filter} onUpdate={onUpdate}>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  disabled={disabled}
+                  className={cn(
+                    "max-w-[260px] truncate py-1.5 px-2",
+                    hasValue
+                      ? "text-neutral-900 dark:text-neutral-100 font-medium"
+                      : "text-neutral-500 dark:text-neutral-400 italic font-normal",
+                    disabled && "text-neutral-400 dark:text-neutral-500"
+                  )}
+                >
+                  <span className="truncate">{hasValue ? displayValue : t("pick value")}</span>
+                </Button>
+              </ValuePopover>
+            )}
             <Button
               variant="secondary"
               size="sm"

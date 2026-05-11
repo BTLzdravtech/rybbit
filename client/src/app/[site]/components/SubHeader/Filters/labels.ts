@@ -50,10 +50,16 @@ export function getOperatorLabel(type: FilterType, isNumeric: boolean, t: T): st
     case "not_equals": return isNumeric ? t("not equals") : t("is not");
     case "contains": return t("contains");
     case "not_contains": return t("not contains");
+    case "starts_with": return t("starts with");
+    case "ends_with": return t("ends with");
     case "regex": return t("regex");
     case "not_regex": return t("not regex");
+    case "is_null": return t("is null");
+    case "is_not_null": return t("is not null");
     case "greater_than": return ">";
     case "less_than": return "<";
+    case "greater_than_or_equal": return ">=";
+    case "less_than_or_equal": return "<=";
     default: return type;
   }
 }
@@ -64,12 +70,22 @@ export function getOperatorMenuLabel(type: FilterType, isNumeric: boolean, t: T)
     case "not_equals": return isNumeric ? t("Not equals") : t("Is not");
     case "contains": return t("Contains");
     case "not_contains": return t("Not contains");
+    case "starts_with": return t("Starts with");
+    case "ends_with": return t("Ends with");
     case "regex": return t("Regex");
     case "not_regex": return t("Not regex");
+    case "is_null": return t("Is null");
+    case "is_not_null": return t("Is not null");
     case "greater_than": return t("Greater than");
     case "less_than": return t("Less than");
+    case "greater_than_or_equal": return t("Greater than or equal to");
+    case "less_than_or_equal": return t("Less than or equal to");
     default: return type;
   }
+}
+
+export function operatorNeedsValue(type: FilterType): boolean {
+  return type !== "is_null" && type !== "is_not_null";
 }
 
 export function formatDisplayValue(

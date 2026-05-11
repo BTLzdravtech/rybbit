@@ -71,7 +71,11 @@ export function ValuePopover({
 
   const isNumeric = isNumericParameter(filter.parameter);
   const isRegex = filter.type === "regex" || filter.type === "not_regex";
-  const isNumericComparison = filter.type === "greater_than" || filter.type === "less_than";
+  const isNumericComparison =
+    filter.type === "greater_than" ||
+    filter.type === "less_than" ||
+    filter.type === "greater_than_or_equal" ||
+    filter.type === "less_than_or_equal";
   const needsTextInput = isNumeric || isRegex || isNumericComparison;
 
   const { data, isFetching } = useMetric({

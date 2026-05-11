@@ -1,6 +1,6 @@
 "use client";
 
-import { Filter, FilterParameter } from "@rybbit/shared";
+import { Filter, FilterParameter, FilterType } from "@rybbit/shared";
 import { useExtracted } from "next-intl";
 import { useState } from "react";
 import {
@@ -35,16 +35,24 @@ export function ParameterPopover({
 
   const handleSelect = (newParam: FilterParameter) => {
     const newIsNumeric = isNumericParameter(newParam);
+    const stringOnly: FilterType[] = [
+      "contains",
+      "not_contains",
+      "starts_with",
+      "ends_with",
+      "regex",
+      "not_regex",
+    ];
+    const numericOnly: FilterType[] = [
+      "greater_than",
+      "less_than",
+      "greater_than_or_equal",
+      "less_than_or_equal",
+    ];
     let newType = filter.type;
-    if (
-      newIsNumeric &&
-      (filter.type === "contains" ||
-        filter.type === "not_contains" ||
-        filter.type === "regex" ||
-        filter.type === "not_regex")
-    ) {
+    if (newIsNumeric && stringOnly.includes(filter.type)) {
       newType = "equals";
-    } else if (!newIsNumeric && (filter.type === "greater_than" || filter.type === "less_than")) {
+    } else if (!newIsNumeric && numericOnly.includes(filter.type)) {
       newType = "equals";
     }
     onUpdate({ ...filter, parameter: newParam, type: newType, value: [] });

@@ -7,7 +7,13 @@ import { Button } from "../../../../../components/ui/button";
 import { useGetRegionName } from "../../../../../lib/geo";
 import { cn } from "../../../../../lib/utils";
 import { isNumericParameter } from "./const";
-import { formatDisplayValue, getOperatorLabel, getParameterLabel } from "./labels";
+import {
+  formatDisplayValue,
+  getOperatorLabel,
+  getParameterIcon,
+  getParameterLabel,
+  operatorNeedsValue,
+} from "./labels";
 import { OperatorPopover } from "./OperatorPopover";
 import { ParameterPopover } from "./ParameterPopover";
 import { ValuePopover } from "./ValuePopover";
@@ -44,6 +50,7 @@ export function FilterComponent({
           size="sm"
           className="font-normal justify-start text-neutral-700 dark:text-neutral-200"
         >
+          {getParameterIcon(filter.parameter)}
           {getParameterLabel(filter.parameter, t)}
         </Button>
       </ParameterPopover>
@@ -52,26 +59,30 @@ export function FilterComponent({
           variant="outline"
           size="sm"
           className={cn(
-            "font-normal justify-start",
-            isNegated ? "text-red-400" : "text-emerald-400"
+            "font-normal justify-start text-neutral-500 dark:text-neutral-400"
           )}
         >
           {getOperatorLabel(filter.type, isNumeric, t)}
         </Button>
       </OperatorPopover>
-      <ValuePopover filter={filter} onUpdate={onUpdate}>
-        <Button
-          variant="outline" size="sm"
-          className={cn(
-            "justify-start truncate",
-            hasValue
-              ? "text-neutral-900 dark:text-neutral-100 font-medium"
-              : "text-neutral-500 dark:text-neutral-400 italic font-normal"
-          )}
-        >
-          <span className="truncate">{hasValue ? displayValue : t("pick value")}</span>
-        </Button>
-      </ValuePopover>
+      {operatorNeedsValue(filter.type) ? (
+        <ValuePopover filter={filter} onUpdate={onUpdate}>
+          <Button
+            variant="outline"
+            size="sm"
+            className={cn(
+              "justify-start truncate",
+              hasValue
+                ? "text-neutral-900 dark:text-neutral-100 font-medium"
+                : "text-neutral-500 dark:text-neutral-400 italic font-normal"
+            )}
+          >
+            <span className="truncate">{hasValue ? displayValue : t("pick value")}</span>
+          </Button>
+        </ValuePopover>
+      ) : (
+        <div />
+      )}
       <Button variant="ghost" className="h-8 w-8" onClick={() => updateFilter(null, index)}>
         <Trash className="w-4 h-4" />
       </Button>

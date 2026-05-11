@@ -40,9 +40,10 @@ export function getStartAndEndDate(time: Time): { startDate: string | null; endD
  */
 function sanitizeFilters(filters?: Filter[]): Filter[] | undefined {
   if (!filters) return undefined;
-  const cleaned = filters.filter(
-    f => f.value.length > 0 && f.value.every(v => v !== "" && v !== null && v !== undefined)
-  );
+  const cleaned = filters.filter(f => {
+    if (f.type === "is_null" || f.type === "is_not_null") return true;
+    return f.value.length > 0 && f.value.every(v => v !== "" && v !== null && v !== undefined);
+  });
   return cleaned.length > 0 ? cleaned : undefined;
 }
 
