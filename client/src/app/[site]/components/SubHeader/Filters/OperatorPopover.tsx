@@ -6,7 +6,16 @@ import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../../../../../components/ui/popover";
 import { cn } from "../../../../../lib/utils";
 import { isNumericParameter, NumericOperatorOptions, StringOperatorOptions } from "./const";
-import { useOperatorMenuLabel } from "./labels";
+import { operatorNeedsValue, useOperatorMenuLabel } from "./labels";
+
+const singleValueOperators: FilterType[] = [
+  "regex",
+  "not_regex",
+  "greater_than",
+  "less_than",
+  "greater_than_or_equal",
+  "less_than_or_equal",
+];
 
 export function OperatorPopover({
   filter,
@@ -24,7 +33,12 @@ export function OperatorPopover({
   const operatorOptions = isNumeric ? NumericOperatorOptions : StringOperatorOptions;
 
   const handleSelect = (newType: FilterType) => {
-    onUpdate({ ...filter, type: newType, value: [] });
+    const value =
+      operatorNeedsValue(newType) && singleValueOperators.includes(newType)
+        ? filter.value.slice(0, 1)
+        : filter.value;
+
+    onUpdate({ ...filter, type: newType, value });
     setOpen(false);
   };
 

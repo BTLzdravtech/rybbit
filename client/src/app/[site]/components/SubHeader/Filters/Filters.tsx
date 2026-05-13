@@ -35,10 +35,6 @@ export function Filters({ availableFilters }: { availableFilters?: FilterParamet
         const isNumeric = isNumericParameter(filter.parameter);
         const displayValue = formatDisplayValue(filter, getRegionName);
         const hasValue = filter.value.length > 0;
-        const isNegated =
-          filter.type === "not_equals" ||
-          filter.type === "not_contains" ||
-          filter.type === "not_regex";
 
         const onUpdate = (next: typeof filter) => updateFilter(next, i);
 

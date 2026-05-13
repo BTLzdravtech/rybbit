@@ -1,7 +1,7 @@
 "use client";
 
 import { Filter, FilterParameter, FilterType } from "@rybbit/shared";
-import { ChevronLeft, ChevronRight, ChevronsUpDown, HelpCircle, ListFilterPlus, Plus } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, ChevronsUpDown, HelpCircle, ListFilterPlus, Plus } from "lucide-react";
 import { useExtracted } from "next-intl";
 import { useMemo, useRef, useState } from "react";
 import { useMetric } from "../../../../../api/analytics/hooks/useGetMetric";
@@ -152,11 +152,13 @@ function ValueStep({
     return { parameter, type, value: selected };
   };
 
+  const canSave = buildFilter() !== null;
   pendingRef.current = buildFilter;
 
   const commitAndClose = () => {
     const f = buildFilter();
-    if (f) onCommit(f);
+    if (!f) return;
+    onCommit(f);
     onClose();
   };
 
@@ -297,6 +299,21 @@ function ValueStep({
             </CommandList>
           </Command>
         )
+      )}
+      {needsValue && (
+        <div className="border-t border-neutral-200 dark:border-neutral-800 p-2">
+          <Button
+            type="button"
+            size="sm"
+            variant="success"
+            className="w-full"
+            disabled={!canSave}
+            onClick={commitAndClose}
+          >
+            <Check className="h-4 w-4" />
+            {t("Save filter")}
+          </Button>
+        </div>
       )}
     </div>
   );
