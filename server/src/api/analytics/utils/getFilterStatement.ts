@@ -1,12 +1,14 @@
 import SqlString from "sqlstring";
 import { filterParamSchema, validateFilters } from "./query-validation.js";
+import { SESSION_CHANNEL_AGG } from "./sessionAttribution.js";
 import { FilterParameter, FilterType } from "../types.js";
 
 // Options for customizing filter behavior
 export interface FilterStatementOptions {
   // Parameters that should use session-level subqueries (finds sessions containing matching events)
   // Default: ["event_name", "channel"] - entry_page and exit_page are always session-level due to special aggregation
-  // Channel is handled as a session acquisition field using the first non-empty channel in the session.
+  // Channel is handled as a session acquisition field using the session's first attributed channel
+  // (SESSION_CHANNEL_AGG), matching how session views derive their channel.
   sessionLevelParams?: FilterParameter[];
 
   // Field name mappings for CTEs that extract fields to different column names
@@ -53,16 +55,23 @@ const wrapLikeValue = (type: FilterType, value: string | number): string => {
 };
 
 export const getSqlParam = (parameter: FilterParameter) => {
-  // Handle URL parameters through the url_parameters map
+  if (parameter.startsWith("feature_flag:")) {
+    const key = parameter.substring("feature_flag:".length);
+    return `feature_flags[${SqlString.escape(key)}]`;
+  }
+
+  // Handle URL parameters through the url_parameters map.
+  // The map key is attacker-controlled, so it must be escaped (matching the
+  // feature_flag branch above) — not raw-interpolated — to prevent SQL injection.
   if (parameter.startsWith("utm_") || parameter.startsWith("url_param:")) {
     // For explicit url_param: prefix (e.g., url_param:campaign_id)
     if (parameter.startsWith("url_param:")) {
       const paramName = parameter.substring("url_param:".length);
-      return `url_parameters['${paramName}']`;
+      return `url_parameters[${SqlString.escape(paramName)}]`;
     }
 
     const utm = parameter; // e.g., utm_source, utm_medium, etc.
-    return `url_parameters['${utm}']`;
+    return `url_parameters[${SqlString.escape(utm)}]`;
   }
 
   if (parameter === "referrer") {
@@ -150,12 +159,15 @@ export function getFilterStatement(
     }
 
     const op = filterTypeToOperator(filterType);
+    // Negative filters must AND-join across values (NOT IN semantics): OR-joining
+    // negations is a tautology — (x != 'a' OR x != 'b') matches every row.
+    const joiner = filterType === "not_equals" || filterType === "not_contains" ? " AND " : " OR ";
     const condition =
       values.length === 1
         ? `${expression} ${op} ${SqlString.escape(wrapLikeValue(filterType, values[0]))}`
         : `(${values
             .map(value => `${expression} ${op} ${SqlString.escape(wrapLikeValue(filterType, value))}`)
-            .join(" OR ")})`;
+            .join(joiner)})`;
 
     return condition;
   };
@@ -179,26 +191,23 @@ export function getFilterStatement(
           )`;
   };
 
-  const buildSessionFirstValueSubquery = (
-    param: FilterParameter,
-    alias: string,
+  const buildSessionChannelSubquery = (
     filterType: FilterType,
     values: (string | number)[],
     wildcardPrefix: string
   ): string => {
-    const whereClause = [siteIdFilter, timeFilter, `${param} IS NOT NULL`, `${param} <> ''`]
-      .filter(Boolean)
-      .join(" AND ");
-    const condition = buildStringFilterCondition(alias, filterType, values, wildcardPrefix);
+    const whereClause = [siteIdFilter, timeFilter].filter(Boolean).join(" AND ");
+    const whereStatement = whereClause ? `WHERE ${whereClause}` : "";
+    const condition = buildStringFilterCondition("session_channel", filterType, values, wildcardPrefix);
 
     return `session_id IN (
             SELECT session_id
             FROM (
               SELECT
                 session_id,
-                argMin(${param}, timestamp) AS ${alias}
+                ${SESSION_CHANNEL_AGG} AS session_channel
               FROM events
-              WHERE ${whereClause}
+              ${whereStatement}
               GROUP BY session_id
             )
             WHERE ${condition}
@@ -214,10 +223,10 @@ export function getFilterStatement(
         const isNullCheck = filter.type === "is_null" || filter.type === "is_not_null";
 
         // Handle session-level filters (configurable via options).
-        // Most parameters match sessions containing an event; channel uses the session's first value.
+        // Most parameters match sessions containing an event; channel uses the session's first attributed value.
         if (sessionLevelParams.includes(filter.parameter)) {
           if (filter.parameter === "channel") {
-            return buildSessionFirstValueSubquery(filter.parameter, "session_channel", filter.type, filter.value, x);
+            return buildSessionChannelSubquery(filter.type, filter.value, x);
           }
 
           return buildSessionLevelSubquery(filter.parameter, filter.type, filter.value, x);
@@ -324,17 +333,13 @@ export function getFilterStatement(
         // Special handling for lat/lon with tolerance (only for equals/not_equals)
         if (filter.parameter === "lat" || filter.parameter === "lon") {
           const tolerance = 0.001;
-          if (filter.value.length === 1) {
-            const targetValue = Number(filter.value[0]);
-            return `${filter.parameter} >= ${targetValue - tolerance} AND ${filter.parameter} <= ${targetValue + tolerance}`;
-          }
-
           const rangeConditions = filter.value.map(value => {
             const targetValue = Number(value);
             return `(${filter.parameter} >= ${targetValue - tolerance} AND ${filter.parameter} <= ${targetValue + tolerance})`;
           });
-
-          return `(${rangeConditions.join(" OR ")})`;
+          const rangeCondition =
+            rangeConditions.length === 1 ? rangeConditions[0] : `(${rangeConditions.join(" OR ")})`;
+          return filter.type === "not_equals" ? `NOT ${rangeCondition}` : rangeCondition;
         }
 
         if (filter.value.length === 1) {
@@ -342,12 +347,15 @@ export function getFilterStatement(
           return `${getSqlParam(filter.parameter)} ${filterTypeToOperator(filter.type)} ${value}`;
         }
 
+        // Negative filters must AND-join across values (NOT IN semantics): OR-joining
+        // negations is a tautology — (x != 'a' OR x != 'b') matches every row.
+        const joiner = filter.type === "not_equals" || filter.type === "not_contains" ? " AND " : " OR ";
         const valuesWithOperator = filter.value.map(value => {
           const escapedValue = isNumericParam ? value : SqlString.escape(x + value + x);
           return `${getSqlParam(filter.parameter)} ${filterTypeToOperator(filter.type)} ${escapedValue}`;
         });
 
-        return `(${valuesWithOperator.join(" OR ")})`;
+        return `(${valuesWithOperator.join(joiner)})`;
       })
       .join(" AND ");
 

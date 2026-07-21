@@ -1,6 +1,7 @@
 "use client";
 
 import { getTimezone, useStore } from "@/lib/store";
+import { LITE_DASHBOARD } from "@/lib/const";
 import { SelectItem, Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { TimeBucket } from "@rybbit/shared";
 import { DateTime } from "luxon";
@@ -68,19 +69,23 @@ const getRangeDurationMinutes = (time: Time): number | null => {
   return null;
 };
 
-export function BucketSelection() {
+export function BucketSelection({ size = "sm" }: { size?: "default" | "sm" }) {
   const t = useExtracted();
   const { bucket, setBucket, time } = useStore();
 
   const renderOptions = (options: TimeBucket[], durationMinutes: number | null) => {
     const availableOptions = options.filter(
-      option => durationMinutes === null || durationMinutes >= bucketDurationMinutes(option) * 2
+      option =>
+        // The lite dashboard is backed by hourly materialized views, so buckets
+        // finer than an hour have no underlying data.
+        (!LITE_DASHBOARD || bucketDurationMinutes(option) >= 60) &&
+        (durationMinutes === null || durationMinutes >= bucketDurationMinutes(option) * 2)
     );
 
     return (
-      <SelectContent>
+      <SelectContent size={size}>
         {availableOptions.map(option => (
-          <SelectItem key={option} size="sm" value={option}>
+          <SelectItem key={option} size={size} value={option}>
             {getBucketLabel(option)}
           </SelectItem>
         ))}
@@ -144,9 +149,9 @@ export function BucketSelection() {
       const timezone = getTimezone();
       const exactRangeMinutes = exactRange
         ? DateTime.fromISO(`${time.endDate}T${time.endTime}`, { zone: timezone }).diff(
-          DateTime.fromISO(`${time.startDate}T${time.startTime}`, { zone: timezone }),
-          "minutes"
-        ).minutes
+            DateTime.fromISO(`${time.startDate}T${time.startTime}`, { zone: timezone }),
+            "minutes"
+          ).minutes
         : undefined;
       const timeRangeLength =
         exactRangeMinutes !== undefined
@@ -171,9 +176,9 @@ export function BucketSelection() {
 
   return (
     <Select value={bucket} onValueChange={setBucket}>
-      <SelectTrigger className="w-[90px]" size="sm">
+      <SelectTrigger className="w-[90px]" size={size}>
         <div className="flex items-center gap-1">
-          <TimerReset className="w-3 h-3" />
+          <TimerReset className={size === "sm" ? "w-3 h-3" : "w-4 h-4"} />
           <SelectValue />
         </div>
       </SelectTrigger>

@@ -2,24 +2,26 @@
 export {
   addSite,
   deleteSite,
+  moveSite,
   updateSiteConfig,
   fetchSite,
   fetchSitesFromOrg,
   fetchSiteHasData,
   fetchSiteIsPublic,
-  verifyScript,
 } from "./sites";
-export type { SiteResponse, GetSitesFromOrgResponse, VerifyScriptResponse } from "./sites";
+export type { SiteResponse, GetSitesFromOrgResponse } from "./sites";
 
 // Organizations endpoints
 export {
   getUserOrganizations,
   addUserToOrganization,
+  createUserInOrganization,
   USER_ORGANIZATIONS_QUERY_KEY,
 } from "./organizations";
 export type {
   UserOrganization,
   AddUserToOrganizationInput,
+  CreateUserInOrganizationInput,
   RemoveUserFromOrganizationInput,
 } from "./organizations";
 
@@ -28,7 +30,7 @@ export { getAdminOrganizations } from "./adminOrganizations";
 export type { AdminOrganizationData } from "./adminOrganizations";
 
 // Admin Sites endpoints
-export { getAdminSites } from "./adminSites";
+export { getAdminSites, adminMoveSite } from "./adminSites";
 export type { AdminSiteData } from "./adminSites";
 
 // Admin Service Event Count endpoints
@@ -54,6 +56,24 @@ export type {
   UpdateExcludedCountriesRequest,
   UpdateExcludedCountriesResponse,
 } from "./excludedCountries";
+
+// Excluded Paths / Hostnames / User Agents endpoints
+export {
+  fetchExcludedPaths,
+  updateExcludedPaths,
+  fetchExcludedHostnames,
+  updateExcludedHostnames,
+  fetchExcludedUserAgents,
+  updateExcludedUserAgents,
+} from "./exclusions";
+export type {
+  ExcludedPathsResponse,
+  ExcludedHostnamesResponse,
+  ExcludedUserAgentsResponse,
+  UpdateExcludedPathsRequest,
+  UpdateExcludedHostnamesRequest,
+  UpdateExcludedUserAgentsRequest,
+} from "./exclusions";
 
 // Account Settings endpoints
 export { updateAccountSettings } from "./accountSettings";

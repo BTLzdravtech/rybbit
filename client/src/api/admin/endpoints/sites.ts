@@ -4,6 +4,7 @@ export type SiteResponse = {
   id: string | null;
   siteId: number;
   name: string;
+  type: "web" | "mobile" | null;
   domain: string;
   createdAt: string;
   updatedAt: string;
@@ -45,6 +46,7 @@ export type GetSitesFromOrgResponse = {
     id: string | null;
     siteId: number;
     name: string;
+    type: "web" | "mobile" | null;
     domain: string;
     createdAt: string;
     updatedAt: string;
@@ -76,6 +78,7 @@ export function addSite(
   name: string,
   organizationId: string,
   settings?: {
+    type?: "web" | "mobile";
     isPublic?: boolean;
     saltUserIds?: boolean;
     blockBots?: boolean;
@@ -86,6 +89,7 @@ export function addSite(
     data: {
       domain,
       name,
+      type: settings?.type || "web",
       public: settings?.isPublic || false,
       saltUserIds: settings?.saltUserIds || false,
       blockBots: settings?.blockBots === undefined ? true : settings?.blockBots,
@@ -102,11 +106,19 @@ export function deleteSite(siteId: number) {
   });
 }
 
+export function moveSite(siteId: number, organizationId: string) {
+  return authedFetch<{ success: boolean; organizationId: string }>(`/sites/${siteId}/move`, undefined, {
+    method: "PUT",
+    data: { organizationId },
+  });
+}
+
 // Consolidated function to update any site configuration
 export function updateSiteConfig(
   siteId: number,
   config: {
     name?: string;
+    type?: "web" | "mobile" | null;
     domain?: string;
     public?: boolean;
     embedEnabled?: boolean;
@@ -114,6 +126,9 @@ export function updateSiteConfig(
     blockBots?: boolean;
     excludedIPs?: string[];
     excludedCountries?: string[];
+    excludedPaths?: string[];
+    excludedHostnames?: string[];
+    excludedUserAgents?: string[];
     sessionReplay?: boolean;
     webVitals?: boolean;
     trackErrors?: boolean;
@@ -121,6 +136,7 @@ export function updateSiteConfig(
     trackUrlParams?: boolean;
     trackInitialPageView?: boolean;
     trackSpaNavigation?: boolean;
+    trackIp?: boolean;
     trackButtonClicks?: boolean;
     trackCopy?: boolean;
     trackFormInteractions?: boolean;
@@ -146,15 +162,4 @@ export function fetchSiteHasData(siteId: string) {
 
 export function fetchSiteIsPublic(siteId: string | number) {
   return authedFetch<{ isPublic: boolean }>(`/sites/${siteId}/is-public`);
-}
-
-export interface VerifyScriptResponse {
-  scriptTagFound: boolean;
-  scriptExecuted: boolean;
-  siteIdMatch: boolean;
-  issues: string[];
-}
-
-export function verifyScript(siteId: number | string) {
-  return authedFetch<VerifyScriptResponse>(`/sites/${siteId}/verify-script`);
 }

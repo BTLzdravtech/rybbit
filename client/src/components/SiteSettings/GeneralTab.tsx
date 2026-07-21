@@ -1,5 +1,6 @@
 "use client";
 
+import { useQueryClient } from "@tanstack/react-query";
 import { AlertTriangle } from "lucide-react";
 import { useExtracted } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -20,9 +21,17 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 
-import { deleteSite, updateSiteConfig, SiteResponse } from "@/api/admin/endpoints";
+import { deleteSite, moveSite, updateSiteConfig, SiteResponse } from "@/api/admin/endpoints";
+import { useUserOrganizations } from "@/api/admin/hooks/useOrganizations";
 import { useGetSitesFromOrg } from "@/api/admin/hooks/useSites";
 import { normalizeDomain } from "@/lib/utils";
 
@@ -30,6 +39,7 @@ interface GeneralTabProps {
   siteMetadata: SiteResponse;
   disabled?: boolean;
   onClose?: () => void;
+  onPublicChange?: (checked: boolean) => void;
 }
 
 interface ToggleConfig {
@@ -44,16 +54,28 @@ interface ToggleConfig {
   badge?: ReactNode;
 }
 
-export function GeneralTab({ siteMetadata, disabled = false, onClose }: GeneralTabProps) {
+export function GeneralTab({ siteMetadata, disabled = false, onClose, onPublicChange }: GeneralTabProps) {
   const t = useExtracted();
   const { refetch } = useGetSitesFromOrg(siteMetadata?.organizationId ?? "");
+  const { data: userOrganizations } = useUserOrganizations();
+  const queryClient = useQueryClient();
   const router = useRouter();
+  const isMobileSite = siteMetadata.type === "mobile";
+  const identifierLabel = isMobileSite ? t("App Identifier") : t("Domain");
 
   const [newName, setNewName] = useState(siteMetadata.name);
   const [isChangingName, setIsChangingName] = useState(false);
   const [newDomain, setNewDomain] = useState(siteMetadata.domain);
   const [isChangingDomain, setIsChangingDomain] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [targetOrgId, setTargetOrgId] = useState("");
+  const [isMoving, setIsMoving] = useState(false);
+
+  // Organizations the user can move the site into: those they administer,
+  // excluding the site's current organization.
+  const moveTargets = (userOrganizations ?? []).filter(
+    org => (org.role === "admin" || org.role === "owner") && org.id !== siteMetadata.organizationId
+  );
 
   const [toggleStates, setToggleStates] = useState({
     public: siteMetadata.public || false,
@@ -74,6 +96,9 @@ export function GeneralTab({ siteMetadata, disabled = false, onClose }: GeneralT
       try {
         await updateSiteConfig(siteMetadata.siteId, { [key]: checked });
         setToggleStates(prev => ({ ...prev, [key]: checked }));
+        if (key === "public") {
+          onPublicChange?.(checked);
+        }
         const message = successMessage
           ? checked
             ? successMessage.enabled
@@ -89,7 +114,7 @@ export function GeneralTab({ siteMetadata, disabled = false, onClose }: GeneralT
         setLoadingStates(prev => ({ ...prev, [key]: false }));
       }
     },
-    [siteMetadata.siteId, refetch]
+    [siteMetadata.siteId, refetch, onPublicChange]
   );
 
   const handleNameChange = async () => {
@@ -114,15 +139,15 @@ export function GeneralTab({ siteMetadata, disabled = false, onClose }: GeneralT
 
   const handleDomainChange = async () => {
     if (!newDomain) {
-      toast.error(t("Domain cannot be empty"));
+      toast.error(isMobileSite ? t("App identifier cannot be empty") : t("Domain cannot be empty"));
       return;
     }
 
     try {
       setIsChangingDomain(true);
-      const normalizedDomain = normalizeDomain(newDomain);
+      const normalizedDomain = isMobileSite ? newDomain.trim() : normalizeDomain(newDomain);
       await updateSiteConfig(siteMetadata.siteId, { domain: normalizedDomain });
-      toast.success(t("Domain updated successfully"));
+      toast.success(isMobileSite ? t("App identifier updated successfully") : t("Domain updated successfully"));
       router.refresh();
       refetch();
     } catch (error) {
@@ -146,6 +171,28 @@ export function GeneralTab({ siteMetadata, disabled = false, onClose }: GeneralT
       toast.error(t("Failed to delete site"));
     } finally {
       setIsDeleting(false);
+    }
+  };
+
+  const handleMove = async () => {
+    if (!targetOrgId) {
+      return;
+    }
+
+    try {
+      setIsMoving(true);
+      await moveSite(siteMetadata.siteId, targetOrgId);
+      toast.success(t("Site moved successfully"));
+      queryClient.invalidateQueries({ queryKey: ["get-sites-from-org"] });
+      queryClient.invalidateQueries({ queryKey: ["get-site", siteMetadata.siteId] });
+      setTargetOrgId("");
+      router.refresh();
+      refetch();
+    } catch (error) {
+      console.error("Error moving site:", error);
+      toast.error(error instanceof Error ? error.message : t("Failed to move site"));
+    } finally {
+      setIsMoving(false);
     }
   };
 
@@ -209,14 +256,19 @@ export function GeneralTab({ siteMetadata, disabled = false, onClose }: GeneralT
 
       <div className="space-y-3">
         <div>
-          <h4 className="text-sm font-semibold text-foreground">{t("Domain")}</h4>
-          <p className="text-xs text-muted-foreground">{t("The domain used for tracking")}</p>
+          <h4 className="text-sm font-semibold text-foreground">{identifierLabel}</h4>
+          <p className="text-xs text-muted-foreground">
+            {isMobileSite ? t("The bundle or package identifier used for tracking") : t("The domain used for tracking")}
+          </p>
         </div>
         <div className="flex space-x-2">
           <Input
             value={newDomain}
-            onChange={e => setNewDomain(e.target.value.toLowerCase())}
-            placeholder="example.com"
+            onChange={e => {
+              const value = e.target.value.trim();
+              setNewDomain(isMobileSite ? value : value.toLowerCase());
+            }}
+            placeholder={isMobileSite ? "com.example.app" : "example.com"}
           />
           <Button
             variant="outline"
@@ -255,6 +307,60 @@ export function GeneralTab({ siteMetadata, disabled = false, onClose }: GeneralT
           </div>
         ))}
       </div>
+
+      {!disabled && moveTargets.length > 0 && (
+        <div className="space-y-3">
+          <div>
+            <h4 className="text-sm font-semibold text-foreground">{t("Move to Organization")}</h4>
+            <p className="text-xs text-muted-foreground">
+              {t(
+                "Transfer this site to another organization you administer. Team and restricted member access for this site will be reset."
+              )}
+            </p>
+          </div>
+          <div className="flex space-x-2">
+            <Select value={targetOrgId} onValueChange={setTargetOrgId}>
+              <SelectTrigger className="flex-1">
+                <SelectValue placeholder={t("Select an organization")} />
+              </SelectTrigger>
+              <SelectContent>
+                {moveTargets.map(org => (
+                  <SelectItem key={org.id} value={org.id}>
+                    {org.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="outline" disabled={!targetOrgId || isMoving}>
+                  {isMoving ? t("Moving...") : t("Move")}
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>{t("Move this site?")}</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    {t(
+                      'This will move "{siteName}" to {orgName}. Team and restricted member access for this site will be reset, and members of the current organization may lose access.',
+                      {
+                        siteName: siteMetadata.name,
+                        orgName: moveTargets.find(org => org.id === targetOrgId)?.name ?? "",
+                      }
+                    )}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>{t("Cancel")}</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleMove} disabled={isMoving}>
+                    {isMoving ? t("Moving...") : t("Yes, move site")}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+        </div>
+      )}
 
       <div className="space-y-3 pt-3">
         <h4 className="text-sm font-semibold text-destructive">{t("Danger Zone")}</h4>
