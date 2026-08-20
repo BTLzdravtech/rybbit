@@ -32,6 +32,7 @@ import { getSiteRouteContext } from "../../../../lib/siteRoute";
 import { useEmbedPageOptions } from "../../utils";
 import { SiteSelector } from "./SiteSelector";
 import { useStripeSubscription } from "../../../../lib/subscription/useStripeSubscription";
+import { useAppEnv } from "../../../../hooks/useIsProduction";
 
 function SidebarContent() {
   const t = useExtracted();
@@ -39,6 +40,7 @@ function SidebarContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { embed, hideSidebar } = useEmbedPageOptions();
+  const appEnv = useAppEnv();
 
   const { data: site } = useGetSite(Number(pathname.split("/")[1]));
   const isMobileSite = site?.type === "mobile";
@@ -126,7 +128,7 @@ function SidebarContent() {
             icon={<Code className="w-4 h-4" />}
           />
         </div>
-        {/* {!IS_CLOUD && (
+        {!IS_CLOUD && (
           <>
             <SidebarComponents.Item
               label={t("Query")}
@@ -141,17 +143,20 @@ function SidebarContent() {
               icon={<LayoutGrid className="w-4 h-4" />}
             />
           </>
-        )} */}
+        )}
         <SidebarComponents.SectionHeader>{t("Product Analytics")}</SidebarComponents.SectionHeader>
         <div className="hidden md:block">
-          {!isMobileSite && !subscription?.planName?.startsWith("appsumo") && !isSubscriptionLoading && (
-            <SidebarComponents.Item
-              label={t("Replay")}
-              active={isActiveTab("replay")}
-              href={getTabPath("replay")}
-              icon={<Video className="w-4 h-4" />}
-            />
-          )}
+          {!isMobileSite &&
+            !subscription?.planName?.startsWith("appsumo") &&
+            !isSubscriptionLoading &&
+            appEnv !== "demo" && (
+              <SidebarComponents.Item
+                label={t("Replay")}
+                active={isActiveTab("replay")}
+                href={getTabPath("replay")}
+                icon={<Video className="w-4 h-4" />}
+              />
+            )}
         </div>
         {/* {!privateKey && (
           <SidebarComponents.Item
