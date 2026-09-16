@@ -56,3 +56,5 @@ coverage/
 .github/
 
 .impeccable/critique
+# Private per-checkout Claude Code notes
+CLAUDE.local.md
